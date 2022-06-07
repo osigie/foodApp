@@ -1,6 +1,7 @@
 import React from "react";
-import image from "../../assets/meals.jpg"
-import classes from "./Header.module.css"
+import image from "../../assets/meals.jpg";
+import classes from "./Header.module.css";
+import HeaderCartButton from "./HeaderCartButton";
 type Props = {};
 
 const Header = (props: Props) => {
@@ -8,10 +9,10 @@ const Header = (props: Props) => {
     <>
       <header className={classes.header}>
         <h1>Food App </h1>
-        <button>Cart</button>
+        <HeaderCartButton />
       </header>
-      <div className= {classes["main-image"]}>
-        <img src = {image} alt =  "A table full of yummy meals" />
+      <div className={classes["main-image"]}>
+        <img src={image} alt="A table full of yummy meals" />
       </div>
     </>
   );
