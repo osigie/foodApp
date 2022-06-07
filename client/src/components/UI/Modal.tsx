@@ -1,13 +1,35 @@
+import classes from "./Modal.module.css";
+import React, { ReactNode } from "react";
+import ReactDom from "react-dom";
 
-import classes from "./Modal.module.css"
-import React from 'react'
+type childProps = {
+  children: ReactNode;
+};
 
-type Props = {}
+const BackDrop = () => {
+  return <div className={classes.backdrop}></div>;
+};
 
-const Modal = (props: Props) => {
+const ModalOverLays = (props: childProps) => {
   return (
-    <div>Modal</div>
-  )
-}
+    <div className={classes.modal}>
+      <div className={classes.content}>{props.children}</div>
+    </div>
+  );
+};
 
-export default Modal
+const portElement = document.getElementById("overlays");
+
+const Modal = (props: childProps) => {
+  return (
+    <>
+      {ReactDom.createPortal(<BackDrop />, portElement as Element)}
+      {ReactDom.createPortal(
+        <ModalOverLays> {props.children} </ModalOverLays>,
+        portElement as Element
+      )}
+    </>
+  );
+};
+
+export default Modal;
