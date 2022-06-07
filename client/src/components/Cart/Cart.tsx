@@ -1,8 +1,10 @@
 import classes from "./Cart.module.css";
 import React from "react";
-import Modal from "../UI/Modal"
+import Modal from "../UI/Modal";
 
-type Props = {};
+type Props = {
+  onClose: () => void;
+};
 
 const Cart = (props: Props) => {
   const cartItem = (
@@ -13,15 +15,17 @@ const Cart = (props: Props) => {
     </ul>
   );
   return (
-    <Modal>
+    <Modal onClose={props.onClose}>
       {cartItem}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>78</span>
       </div>
       <div className={classes.actions}>
-        <button className = {classes["button--alt"]}>Close</button>
-        <button className = {classes.button}>Order</button>
+        <button className={classes["button--alt"]} onClick={props.onClose}>
+          Close
+        </button>
+        <button className={classes.button}>Order</button>
       </div>
     </Modal>
   );

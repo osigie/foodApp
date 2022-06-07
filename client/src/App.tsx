@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import Header from "./components/Layout/Header";
@@ -6,10 +6,18 @@ import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
 
 function App() {
+  const [showCart, setShowCart] = useState(false);
+  const showCartFunc = () => {
+    setShowCart(true);
+  };
+  const removeCartFunc = () => {
+    setShowCart(false);
+  };
   return (
     <div>
-      <Cart />
-      <Header />
+      {showCart && <Cart onClose={removeCartFunc} />}
+
+      <Header onShow={showCartFunc} />
 
       <main>
         <Meals />
