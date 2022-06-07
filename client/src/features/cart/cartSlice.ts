@@ -5,6 +5,7 @@ type mealObj = {
   name: string;
   description: string;
   price: number;
+  amount: number;
 };
 
 export interface cartState {
@@ -22,7 +23,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action) => {
-      state.items = state.items.concat(action.payload.item);
+      state.items = state.items.concat(action.payload);
       state.totalAmount =
         state.totalAmount + action.payload.amount * action.payload.price;
     },

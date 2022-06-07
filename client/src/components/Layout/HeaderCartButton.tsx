@@ -10,7 +10,7 @@ type Props = {
 const HeaderCartButton = (props: Props) => {
   const cartItems = useAppSelector((store) => store.cart.items);
   const numOfCartItems = cartItems.reduce((acc, curr, index) => {
-    return acc + curr.price;
+    return acc + curr.amount;
   }, 0);
 
   return (
