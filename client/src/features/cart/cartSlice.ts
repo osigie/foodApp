@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type mealObj = {
-  id: number;
+export type mealObj = {
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -23,9 +23,29 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action) => {
-      state.items = state.items.concat(action.payload);
-      state.totalAmount =
-        state.totalAmount + action.payload.amount * action.payload.price;
+      const index = state.items.findIndex((item) => {
+        return item.id === action.payload.id;
+      });
+      const updated = state.items.find((item) => {
+        return item.id === action.payload.id;
+      });
+      const updatedTotalAmount =
+        state.totalAmount + action.payload.price * action.payload.amount;
+
+      const existingCartItem = state.items[index];
+      let updatedItems;
+      if (existingCartItem) {
+        const updatedItem = {
+          ...existingCartItem,
+          amount: existingCartItem.amount + action.payload.amount,
+        };
+        updatedItems = [...state.items];
+        updatedItems[index] = updatedItem;
+      } else {
+        updatedItems = state.items.concat(action.payload);
+      }
+      state.items = updatedItems;
+      state.totalAmount = updatedTotalAmount;
     },
     removeItemFromCart: (state, action) => {},
   },

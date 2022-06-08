@@ -6,7 +6,7 @@ type Props = {
 };
 
 const MealItemForm = (props: Props) => {
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const inputRef: any = useRef();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -19,11 +19,14 @@ const MealItemForm = (props: Props) => {
       enteredAmountNum < 1 ||
       enteredAmountNum > 5
     ) {
-      setIsValid(false);
+      setIsValid(true);
       return;
     }
     props.onAddAmount(enteredAmountNum);
   };
+
+
+  
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <Input
