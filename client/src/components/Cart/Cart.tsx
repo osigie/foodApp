@@ -5,7 +5,10 @@ import Modal from "../UI/Modal";
 import { useAppSelector } from "../../app/hooks";
 import { mealObj } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../features/cart/cartSlice";
+import {
+  addItemToCart,
+  removeItemFromCart,
+} from "../../features/cart/cartSlice";
 type Props = {
   onClose: () => void;
 };
@@ -16,8 +19,6 @@ const Cart = (props: Props) => {
   const total = totalAmount.toFixed(2);
 
   const handleAdd = (item: mealObj) => {
-    // console.log(item)
-
     const data = {
       id: item.id,
       name: item.name,
@@ -27,7 +28,10 @@ const Cart = (props: Props) => {
     dispatch(addItemToCart(data));
   };
 
-  const handleRemove = (id: string) => {};
+  const handleRemove = (id: string) => {
+    dispatch(removeItemFromCart(id));
+  };
+
   const cartItem = (
     <ul className={classes["cart-items"]}>
       {items.map((each, key) => {
