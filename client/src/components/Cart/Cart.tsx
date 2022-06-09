@@ -8,14 +8,22 @@ import { useDispatch } from "react-redux";
 import {
   addItemToCart,
   removeItemFromCart,
+  clearCart
 } from "../../features/cart/cartSlice";
 import CheckOut from "./CheckOut";
+import { UserData } from "./CheckOut";
+import axios from "axios";
 type Props = {
   onClose: () => void;
 };
 
 const Cart = (props: Props) => {
   const [isCheckOut, setIsCheckOUt] = useState(false);
+  const [submit, setSubmit] = useState({
+    loading: false,
+    didSubmit: false,
+    msg: "Sending data ................",
+  });
   const dispatch = useDispatch();
   const { items, totalAmount } = useAppSelector((store) => store.cart);
   const total = totalAmount.toFixed(2);
@@ -55,14 +63,42 @@ const Cart = (props: Props) => {
   const handleIsCheckOut = () => {
     setIsCheckOUt(true);
   };
-  return (
-    <Modal onClose={props.onClose}>
+
+  const sendData = async (data: UserData) => {
+    setSubmit({
+      ...submit,
+      loading: true,
+    });
+    try {
+      const response = await axios.post(
+        "https://food-app-d4b05-default-rtdb.firebaseio.com/orders.json",
+        {
+          items,
+          data,
+        }
+      );
+      setSubmit({
+        ...submit,
+        didSubmit: true,
+        loading: false,
+        msg: "Successfully submitted...",
+      });
+      if(response.status === 200){
+dispatch(clearCart())
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const realContent = (
+    <>
       {cartItem}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{`$${total}`}</span>
       </div>
-      {isCheckOut && <CheckOut onClick = {props.onClose} />}
+      {isCheckOut && <CheckOut onClick={props.onClose} sendData={sendData} />}
 
       {!isCheckOut && (
         <div className={classes.actions}>
@@ -76,6 +112,26 @@ const Cart = (props: Props) => {
           )}
         </div>
       )}
+    </>
+  );
+
+  const loadingContent = <p>{submit.msg}</p>;
+  const SuccessfulContent = (
+    <>
+      <p>{submit.msg}</p>
+      <div className={classes.actions}>
+        <button className={classes.button} onClick={props.onClose}>
+          Close
+        </button>
+      </div>
+    </>
+  );
+
+  return (
+    <Modal onClose={props.onClose}>
+      {!submit.loading && !submit.didSubmit && realContent}
+      {submit.loading && loadingContent}
+      {!submit.loading && submit.didSubmit && SuccessfulContent}
     </Modal>
   );
 };

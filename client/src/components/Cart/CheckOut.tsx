@@ -1,8 +1,16 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import classes from "./CheckOut.module.css";
+
+export interface UserData {
+  name: string | undefined;
+  street: string | undefined;
+  postal: string | undefined;
+  city: string | undefined;
+};
 
 type Props = {
   onClick: () => void;
+  sendData: (data: UserData) => void;
 };
 
 //Helper functions
@@ -24,15 +32,7 @@ const CheckOut = (props: Props) => {
 
   const confirmHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formIsValid = myValidation();
-    if (!formIsValid) {
-      return;
-    } else {
-      //make network request
-    }
-  };
 
-  const myValidation = () => {
     const enteredName = nameRef.current?.value;
     const entertedStreet = streetRef.current?.value;
     const enteredPostal = postalRef.current?.value;
@@ -52,9 +52,17 @@ const CheckOut = (props: Props) => {
       postal: isValidPostal,
       city: isValidCity,
     });
-    return formIsValid;
+    if (!formIsValid) {
+      return;
+    } else {
+      props.sendData({
+        name: enteredName,
+        street: entertedStreet,
+        postal: enteredPostal,
+        city: enteredCity,
+      });
+    }
   };
-
 
   const nameClasses = `${classes.control} ${
     validateError.name ? "" : classes.invalid
