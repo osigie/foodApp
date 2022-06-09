@@ -1,5 +1,5 @@
 import classes from "./Cart.module.css";
-import React from "react";
+import React, { useState } from "react";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal";
 import { useAppSelector } from "../../app/hooks";
@@ -9,11 +9,13 @@ import {
   addItemToCart,
   removeItemFromCart,
 } from "../../features/cart/cartSlice";
+import CheckOut from "./CheckOut";
 type Props = {
   onClose: () => void;
 };
 
 const Cart = (props: Props) => {
+  const [isCheckOut, setIsCheckOUt] = useState(false);
   const dispatch = useDispatch();
   const { items, totalAmount } = useAppSelector((store) => store.cart);
   const total = totalAmount.toFixed(2);
@@ -49,6 +51,10 @@ const Cart = (props: Props) => {
       })}
     </ul>
   );
+
+  const handleIsCheckOut = () => {
+    setIsCheckOUt(true);
+  };
   return (
     <Modal onClose={props.onClose}>
       {cartItem}
@@ -56,12 +62,20 @@ const Cart = (props: Props) => {
         <span>Total Amount</span>
         <span>{`$${total}`}</span>
       </div>
-      <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={props.onClose}>
-          Close
-        </button>
-        {items.length > 0 && <button className={classes.button}>Order</button>}
-      </div>
+      {isCheckOut && <CheckOut onClick = {props.onClose} />}
+
+      {!isCheckOut && (
+        <div className={classes.actions}>
+          <button className={classes["button--alt"]} onClick={props.onClose}>
+            Close
+          </button>
+          {items.length > 0 && (
+            <button className={classes.button} onClick={handleIsCheckOut}>
+              Order
+            </button>
+          )}
+        </div>
+      )}
     </Modal>
   );
 };
