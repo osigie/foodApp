@@ -7,10 +7,10 @@ import React, { useState } from "react";
 import { Routes, Route} from "react-router-dom"
 import StoreComponent from "./pages/StoreComponent"
 import Register from "./pages/admin/register/Register"
-import SharedPage from "./pages/admin/dashboard/SharedPage/SharedPage"
-import AddProduct from "./pages/admin/dashboard/AddProduct/AddProduct";
+import SharedPage from "./pages/admin/dashboard/SharedPage"
+import AddProduct from "./pages/admin/dashboard/AddProduct";
 import DeleteProduct from "./pages/admin/dashboard/DeleteProduct/DeleteProduct"
-import Profile from "./pages/admin/dashboard/Profile/Profile"
+import Profile from "./pages/admin/dashboard/Profile"
 function App() {
 
   return (

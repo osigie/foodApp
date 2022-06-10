@@ -6,9 +6,7 @@ import Navlinks from "./NavLinks";
 // import Logo from "./Logo";
 const BigSideBar = () => {
   // const { showSideBar } = useAppContext();
-  const handleToggle = ()=>{
-    
-  }
+ 
   return (
     <Wrapper>
       <div
@@ -21,7 +19,7 @@ const BigSideBar = () => {
             {/* <Logo /> */}
           </header>
 
-          <Navlinks toggleSideBarFunc = {handleToggle} />
+          <Navlinks  />
         </div>
       </div>
     </Wrapper>

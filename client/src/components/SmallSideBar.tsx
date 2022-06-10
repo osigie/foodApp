@@ -3,10 +3,13 @@ import Wrapper from "../assets/wrappers/SmallSidebar";
 // import { useAppContext } from "../context/AppContext";
 import { FaTimes } from "react-icons/fa";
 // import Logo from "./Logo";
-// import Navlinks from "./Navlinks";
+import Navlinks from "./NavLinks";
 
 const SmallSideBar = () => {
   // const { toggleSideBarFunc, showSideBar } = useAppContext();
+  const toggleSideBarFunc = ()=>{
+
+  }
   return (
     <Wrapper>
       <div
@@ -25,7 +28,7 @@ const SmallSideBar = () => {
           <header>
             {/* <Logo /> */}
           </header>
-          {/* <Navlinks toggleSideBarFunc={toggleSideBarFunc} /> */}
+          <Navlinks toggleSideBarFunc={toggleSideBarFunc} />
         </div>
       </div>
     </Wrapper>
