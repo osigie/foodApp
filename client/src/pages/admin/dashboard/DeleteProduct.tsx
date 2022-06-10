@@ -1,13 +1,13 @@
-
-
-import React from 'react'
-
-type Props = {}
+import React from "react";
+import ProductContainer from "../../../components/ProductContainer";
+type Props = {};
 
 const DeleteProduct = (props: Props) => {
   return (
-    <div>DeleteProduct</div>
-  )
-}
+    <>
+      <ProductContainer />
+    </>
+  );
+};
 
-export default DeleteProduct
+export default DeleteProduct;
