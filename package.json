@@ -1,0 +1,35 @@
+{
+  "name": "foodapp",
+  "version": "1.0.0",
+  "description": "minimal e-commerce",
+  "main": "server.ts",
+  "scripts": {
+    "build":"tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon ./dist/server --ignore client",
+    "client": "npm start --prefix client",
+    "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\" \" npm run build\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osigie/foodApp.git"
+  },
+  "author": "Ken Osagie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osigie/foodApp/issues"
+  },
+  "homepage": "https://github.com/osigie/foodApp#readme",
+  "dependencies": {
+    "concurrently": "^7.2.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.42",
+    "typescript": "^4.7.3"
+  }
+}
