@@ -4,7 +4,7 @@
   "description": "minimal e-commerce",
   "main": "server.ts",
   "scripts": {
-    "build":"tsc",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon ./dist/server --ignore client",
     "client": "npm start --prefix client",
@@ -24,6 +24,7 @@
     "concurrently": "^7.2.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mongoose": "^6.3.6",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16"
   },
