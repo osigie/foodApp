@@ -37,7 +37,7 @@ export const getMeals = async (req: Request, res: Response) => {
 export const getOneMeal = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const meal = await mealsDb.findOne({ id });
+    const meal = await mealsDb.findOne({ _id: id });
     meal
       ? res.status(200).json(meal)
       : res.status(400).json({ message: "Meal not found" });
@@ -50,26 +50,30 @@ export const updateMeal = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const updateBody = req.body;
+
+    const meal = await mealsDb.findOne({ _id: id });
+    if (!meal) {
+      res.status(404).json({ message: "meal not found" });
+      return;
+    }
     const update = await mealsDb.findOneAndUpdate(
-      { id },
-      { updateBody },
+      { _id: id },
+      { ...updateBody },
       { new: true }
     );
-    update
-      ? res.status(200).json(update)
-      : res.status(400).json({ message: "Meal not found" });
+    res.status(200).json(update);
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 export const deleteMeals = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const deleted = await mealsDb.deleteOne({ id });
+    const deleted = await mealsDb.findByIdAndDelete({ _id: id });
     deleted
       ? res.status(200).json({ message: "Meal deleted successfully" })
-      : res.status(400).json({ message: "Meal not found" });
+      : res.status(404).json({ message: "Meal not found" });
   } catch (error) {
     console.log(error);
   }

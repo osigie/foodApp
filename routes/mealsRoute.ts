@@ -9,8 +9,11 @@ import {
   updateMeal,
 } from "../controllers/mealsController";
 
-router.route("/meals").post(createMeals).delete(deleteMeals).get(getMeals);
-router.route("/admin/:id").get(getOneMeal).patch(updateMeal);
+router.route("/meals").post(createMeals).get(getMeals);
+router
+  .route("/meals/:id")
+  .get(getOneMeal)
+  .patch(updateMeal)
+  .delete(deleteMeals);
 
-
-export default router
+export default router;
