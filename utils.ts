@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 
 const secret = process.env.JWT_SECRET as string;
 
+
+//generate token
 export const generateToken = (id: string) => {
   return jwt.sign({ id }, secret, { expiresIn: "30d" });
 };
@@ -14,6 +16,8 @@ export const hashPassword = async (password: string) => {
   return hashedPassword;
 };
 
+
+//compare password
  export const comparePassword = async (
   oldPassword: string,
   currentPassword: string
