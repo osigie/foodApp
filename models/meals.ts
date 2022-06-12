@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const Schema = mongoose.Schema;
+
 const MealsSchema = new mongoose.Schema(
   {
     name: {
@@ -18,8 +20,16 @@ const MealsSchema = new mongoose.Schema(
     amount: {
       type: Number,
     },
+    Admin: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Admin",
+    },
   },
   { timestamps: true }
 );
 
 export default mongoose.model("Meals", MealsSchema);
+
+
+
