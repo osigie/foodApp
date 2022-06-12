@@ -1,12 +1,7 @@
 import adminDb from "../models/admin";
 import { NextFunction, Request, Response } from "express";
 import { generateToken, comparePassword, hashing } from "../utils";
-import {
-  ReasonPhrases,
-  StatusCodes,
-  getReasonPhrase,
-  getStatusCode,
-} from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 
 export const register = async (req: Request, res: Response) => {
   try {

@@ -19,8 +19,9 @@ const MealsSchema = new mongoose.Schema(
     },
     amount: {
       type: Number,
+      default: 1,
     },
-    Admin: {
+    admin: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "Admin",
@@ -30,6 +31,3 @@ const MealsSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("Meals", MealsSchema);
-
-
-
