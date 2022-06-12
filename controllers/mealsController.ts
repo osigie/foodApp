@@ -16,7 +16,7 @@ export const getOneMeal = (req: Request, res: Response)=>{
 }
 
 
-export const updateMeals = (req: Request, res: Response)=>{
+export const updateMeal = (req: Request, res: Response)=>{
 
 }
 

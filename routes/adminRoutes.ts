@@ -2,7 +2,9 @@
 import express from "express"
 
 const router = express.Router()
+import {register,login} from "../controllers/adminController"
 
+router.route("/admin/login").post(register)
+router.route("/admin/register").post(login)
 
-router.route("/admin/login").post()
-router.route("/admin/register").post()
+export default router

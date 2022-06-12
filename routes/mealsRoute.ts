@@ -1,7 +1,16 @@
-import express from "express"
+import express from "express";
 
-const router = express.Router()
+const router = express.Router();
+import {
+  createMeals,
+  deleteMeals,
+  getMeals,
+  getOneMeal,
+  updateMeal,
+} from "../controllers/mealsController";
+
+router.route("/meals").post(createMeals).delete(deleteMeals).get(getMeals);
+router.route("/admin/:id").get(getOneMeal).patch(updateMeal);
 
 
-router.route("/meals").post().get()
-// router.route("/admin/:id").get()
+export default router

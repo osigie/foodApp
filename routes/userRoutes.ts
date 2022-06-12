@@ -1,6 +1,9 @@
 import express from "express"
 
 const router = express.Router()
+import {createUser} from "../controllers/userController"
+
+router.route("/user").post(createUser)
 
 
-router.route("/user").post().get()
+export default router
