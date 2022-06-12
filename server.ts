@@ -5,6 +5,7 @@ import userRouter from "./routes/userRoutes"
 import adminRouter from "./routes/adminRoutes"
 import mealsRouter from "./routes/mealsRoute"
 import ordersRouter from "./routes/orderRoutes"
+import morgan from "morgan"
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ const app: Express = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+if (process.env.NODE_ENV !== "production") {
+    app.use(morgan("dev"));
+  }
 // app.get("/", (req: Request, res: Response) => {
 //   res.send("Express + TypeScript Server");
 // });

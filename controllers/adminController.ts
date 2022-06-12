@@ -12,7 +12,6 @@ export const register = async (req: Request, res: Response) => {
         .json({ message: "Please add all fields" });
     }
     //check if Admin exist
-
     const isExist = await adminDb.findOne({ email });
     if (isExist) {
       res
@@ -20,14 +19,17 @@ export const register = async (req: Request, res: Response) => {
         .json({ message: "Admin already exists" });
       return;
     }
-    const hashedPassword = hashing(password);
+    const hashedPassword = await hashing(password);
 
     //Create Admin
-    const admin = await adminDb.create({
+    await adminDb.create({
       name,
       email,
       password: hashedPassword,
     });
+
+    const admin = await adminDb.findOne({ email });
+
     const token = generateToken(admin._id);
     admin
       ? res.status(201).json({ admin: { _id: admin.id, name, email }, token })
@@ -43,18 +45,24 @@ export const login = async (req: Request, res: Response) => {
 
     //check for admin in db
     const admin = await adminDb.findOne({ email });
-
     //compare the password if they match
-    const matchPassword = comparePassword(admin.password, password);
-
+    const matchPassword = await comparePassword(password, admin.password);
     const token = generateToken(admin._id);
-
     if (admin && matchPassword) {
       res
         .status(200)
         .json({ admin: { _id: admin.id, name: admin.name, email }, token });
+      return;
+    } else {
+      res;
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Invalid Credentails" });
+      return;
     }
   } catch (error) {
-    console.log(error);
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Invalid Credentails" });
   }
 };

@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+dotenv.config();
 
 const secret = process.env.JWT_SECRET as string;
-
-
 //generate token
 export const generateToken = (id: string) => {
   return jwt.sign({ id }, secret, { expiresIn: "30d" });
@@ -16,12 +16,11 @@ export const hashing = async (password: string) => {
   return hashedPassword;
 };
 
-
 //compare password
- export const comparePassword = async (
-  oldPassword: string,
-  currentPassword: string
+export const comparePassword = async (
+  currentPassword: string,
+  oldPassword: string
 ) => {
-  const compare = await bcrypt.compare(oldPassword, currentPassword);
+  const compare = await bcrypt.compare(currentPassword, oldPassword);
   return compare;
 };
