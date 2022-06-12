@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
     city: {
       type: String,
     },
+    orders: { type : Array , "default" : [] }
   },
   { timestamps: true }
 );
