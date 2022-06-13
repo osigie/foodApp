@@ -20,6 +20,7 @@ const UserSchema = new mongoose_1.default.Schema({
     },
     city: {
         type: String,
-    }
+    },
+    orders: { type: Array, default: [] },
 }, { timestamps: true });
 exports.default = mongoose_1.default.model("User", UserSchema);
