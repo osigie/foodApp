@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import {
   addItemToCart,
   removeItemFromCart,
-  clearCart
+  clearCart,
 } from "../../features/cart/cartSlice";
 import CheckOut from "./CheckOut";
 import { UserData } from "./CheckOut";
@@ -70,21 +70,18 @@ const Cart = (props: Props) => {
       loading: true,
     });
     try {
-      const response = await axios.post(
-        "https://food-app-d4b05-default-rtdb.firebaseio.com/orders.json",
-        {
-          items,
-          data,
-        }
-      );
+      const response = await axios.post("/user", {
+        ...data,
+        orders: items,
+      });
       setSubmit({
         ...submit,
         didSubmit: true,
         loading: false,
         msg: "Successfully submitted...",
       });
-      if(response.status === 200){
-dispatch(clearCart())
+      if (response.status === 200) {
+        dispatch(clearCart());
       }
     } catch (error) {
       console.log(error);

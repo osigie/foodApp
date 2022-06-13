@@ -9,7 +9,6 @@ const connect_1 = __importDefault(require("./database/connect"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 const mealsRoute_1 = __importDefault(require("./routes/mealsRoute"));
-const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -24,7 +23,6 @@ if (process.env.NODE_ENV !== "production") {
 app.use("/", userRoutes_1.default);
 app.use("/", adminRoutes_1.default);
 app.use("/", mealsRoute_1.default);
-app.use("/", orderRoutes_1.default);
 const start = async () => {
     try {
         await (0, connect_1.default)(process.env.MONGO_URL);
