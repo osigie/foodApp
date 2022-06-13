@@ -44,7 +44,7 @@ const Profile = () => {
     <Wrapper>
       <form onSubmit={handleSubmit} className="form">
         <h3> Add Product </h3>
-        {isAlert && <Alert />}
+       {isAlert && <Alert  alertType = {"success"} msg = {"danger"}/>}
         <div className="form-center">
           <FormRow
             labelText={"name"}

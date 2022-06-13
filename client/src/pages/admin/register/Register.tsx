@@ -1,10 +1,4 @@
-
-
-
-
-
-
-// import Wrapper from "../assets/wrappers/RegisterPage";
+import { login, register } from "../../../features/admin/admin";
 import React, {
   useState,
   useEffect,
@@ -14,36 +8,34 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import FormRow from "../../../components/FormRow";
-import Alert from "../../../components/Alert"
+import Alert from "../../../components/Alert";
 import Wrapper from "../../../assets/wrappers/RegisterPage";
-// import { useAppContext } from "../context/AppContext";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 
+type Props = {};
 
-  type Props = {};
-
-
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+  isMember: true,
+};
 const Register = (props: Props) => {
-  const initialState = {
-    name: "",
-    email: "",
-    password: "",
-    isMember: true,
-  };
+  const { msg, admin, isAlert, isLoading } = useAppSelector(
+    (store) => store.admin
+  );
+  const dispatch = useAppDispatch();
 
   const [details, setDetails] = useState(initialState);
   const navigate = useNavigate();
-  const [isAlert,setIsAlert] = useState(false)
-  //global state and useNavigate
-  //   const { isLoading, isAlert, changeAlert, registerUser, user, loginUser } =
-  //     useAppContext();
 
-//   useEffect(() => {
-//     if (user) {
-//       setTimeout(() => {
-//         navigate("/");
-//       }, 2000);
-//     }
-//   }, [user, navigate]);
+  useEffect(() => {
+    if (admin) {
+      setTimeout(() => {
+        navigate("/admin");
+      }, 2000);
+    }
+  }, [admin, navigate]);
   const toggleMember = () => {
     setDetails({ ...details, isMember: !details.isMember });
   };
@@ -63,9 +55,9 @@ const Register = (props: Props) => {
     const user = { name, email, password };
     if (isMember) {
       // console.log("Already a member");
-      //   loginUser(user);
+      dispatch(login(user));
     } else {
-      //   registerUser(user);
+      dispatch(register(user));
     }
     // console.log(details);
   };
@@ -76,7 +68,7 @@ const Register = (props: Props) => {
         {/* <Logo /> */}
 
         <h3> {details.isMember ? "Login" : "Register"}</h3>
-        {isAlert && <Alert />}
+        {isAlert && <Alert alertType={"success"} msg={msg} />}
         <div className="form-row">
           {/* name field */}
           {!details.isMember && (
@@ -106,7 +98,7 @@ const Register = (props: Props) => {
             name={"password"}
           />
 
-          <button type="submit" className="btn btn-block" disabled>
+          <button type="submit" className="btn btn-block" disabled={isLoading}>
             submit
           </button>
           <p>

@@ -1,8 +1,10 @@
-// import { useAppContext } from "../context/AppContext";
+type Props = {
+  msg: string;
+  alertType: string;
+};
 
-const Alert = () => {
-  //   const { alertType, alertText } = useAppContext();
-  return <div className={`alert`}>{"i am here"}</div>;
+const Alert = (props: Props) => {
+  return <div className={`alert alert-${props.alertType}`}>{props.msg}</div>;
 };
 
 export default Alert;

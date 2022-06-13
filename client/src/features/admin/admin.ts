@@ -20,6 +20,10 @@ const initialState = {
   token: token,
   admin: JSON.parse(admin) || null,
   msg: "",
+  isLoading:false,
+  alertType:"",
+  isAlert:false,
+
 };
 
 // Axios Default
@@ -32,9 +36,11 @@ const adminSlice = createSlice({
     registerAdmin: (state, action) => {
       state.token = action.payload.token;
       state.admin = action.payload.admin;
+      state.isLoading = true
     },
     sendMsg: (state, action) => {
       state.msg = action.payload;
+      state.isAlert = true
     },
   },
 });
@@ -53,14 +59,14 @@ const toLacal = (admin: any, token: string) => {
 export const login = (data: adminData) => {
   return async (dispatch: AppDispatch) => {
     const sendData = async () => {
-      dispatch(actions.sendMsg("logging in....."));
+      dispatch(actions.sendMsg({msg:"logging in.....", isAlert:true}));
       const response = await axios.post("/admin/login", {
         email: data.email,
         password: data.password,
       });
       console.log(response.data);
       if (response.status === 200) {
-        dispatch(actions.sendMsg("successfully logging in"));
+        dispatch(actions.sendMsg( {msg:"successfully logging in", isAlert:false}));
         dispatch(actions.registerAdmin({ token, admin }));
         return;
       }
@@ -69,7 +75,7 @@ export const login = (data: adminData) => {
     try {
       await sendData();
     } catch (error: any) {
-      dispatch(actions.sendMsg(error.response.data.message));
+      dispatch(actions.sendMsg( {msg:error.response.data.message, isAlert:true}));
     }
   };
 };
@@ -77,7 +83,7 @@ export const login = (data: adminData) => {
 export const register = (data: adminData) => {
   return async (dispatch: AppDispatch) => {
     const sendData = async () => {
-      dispatch(actions.sendMsg("creating admin....."));
+      dispatch(actions.sendMsg({msg:"creating admin....." , isAlert:true}));
       const response = await axios.post("/admin/register", {
         email: data.email,
         password: data.password,
@@ -87,7 +93,7 @@ export const register = (data: adminData) => {
       const { token, admin } = response.data;
       toLacal(admin, token);
       if (response.status === 201) {
-        dispatch(actions.sendMsg("admin created succesfully"));
+        dispatch(actions.sendMsg( {msg:"admin created succesfully", isAlert:false}));
         dispatch(actions.registerAdmin({ token, admin }));
         return;
       }
@@ -96,7 +102,7 @@ export const register = (data: adminData) => {
     try {
       await sendData();
     } catch (error: any) {
-      dispatch(actions.sendMsg(error.response.data.message));
+        dispatch(actions.sendMsg( {msg:error.response.data.message, isAlert:true}));
     }
   };
 };
