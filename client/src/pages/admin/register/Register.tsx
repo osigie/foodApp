@@ -1,4 +1,4 @@
-import { login, register } from "../../../features/admin/admin";
+import { login, register, clearAlert } from "../../../features/admin/admin";
 import React, {
   useState,
   useEffect,
@@ -11,6 +11,7 @@ import FormRow from "../../../components/FormRow";
 import Alert from "../../../components/Alert";
 import Wrapper from "../../../assets/wrappers/RegisterPage";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { setError } from "../../../features/admin/admin";
 
 type Props = {};
 
@@ -21,9 +22,10 @@ const initialState = {
   isMember: true,
 };
 const Register = (props: Props) => {
-  const { msg, admin, isAlert, isLoading } = useAppSelector(
+  const { msg, admin, isAlert, isLoading, alertType } = useAppSelector(
     (store) => store.admin
   );
+
   const dispatch = useAppDispatch();
 
   const [details, setDetails] = useState(initialState);
@@ -48,7 +50,14 @@ const Register = (props: Props) => {
     e.preventDefault();
     const { name, email, password, isMember } = details;
     if (!email || !password || (!isMember && !name)) {
-      //   changeAlert();
+      dispatch(
+        setError({
+          msg: "please input all fields",
+          isAlert: true,
+          alertType: "danger",
+        })
+      );
+      dispatch(clearAlert());
       return;
     }
 
@@ -68,7 +77,7 @@ const Register = (props: Props) => {
         {/* <Logo /> */}
 
         <h3> {details.isMember ? "Login" : "Register"}</h3>
-        {isAlert && <Alert alertType={"success"} msg={msg} />}
+        {isAlert && <Alert alertType={alertType} msg={msg} />}
         <div className="form-row">
           {/* name field */}
           {!details.isMember && (

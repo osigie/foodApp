@@ -12,7 +12,6 @@ type adminData = {
   email: string;
   password: string;
 };
-
 const token = localStorage.getItem("token");
 const admin: any = localStorage.getItem("admin");
 
@@ -20,10 +19,9 @@ const initialState = {
   token: token,
   admin: JSON.parse(admin) || null,
   msg: "",
-  isLoading:false,
-  alertType:"",
-  isAlert:false,
-
+  isLoading: false,
+  alertType: "",
+  isAlert: false,
 };
 
 // Axios Default
@@ -36,11 +34,22 @@ const adminSlice = createSlice({
     registerAdmin: (state, action) => {
       state.token = action.payload.token;
       state.admin = action.payload.admin;
-      state.isLoading = true
+      state.isLoading = action.payload.isLoading;
     },
     sendMsg: (state, action) => {
-      state.msg = action.payload;
-      state.isAlert = true
+      state.msg = action.payload.msg;
+      state.isAlert = action.payload.isAlert;
+      state.alertType = action.payload.alertType;
+    },
+    setError: (state, action) => {
+      state.msg = action.payload.msg;
+      state.isAlert = action.payload.isAlert;
+      state.alertType = action.payload.alertType;
+    },
+    clearError: (state) => {
+      state.msg = "";
+      state.isAlert = false;
+      state.alertType = "";
     },
   },
 });
@@ -50,8 +59,17 @@ const actions = adminSlice.actions;
 //add token and admin to local storage
 
 const toLacal = (admin: any, token: string) => {
-  localStorage.setItem("admin", admin);
+  localStorage.setItem("admin", JSON.stringify(admin));
   localStorage.setItem("token", token);
+};
+
+//clear alert
+export const clearAlert = () => {
+  return (dispatch: AppDispatch) => {
+    setTimeout(() => {
+      dispatch(actions.clearError());
+    }, 3000);
+  };
 };
 
 ///action creators
@@ -59,14 +77,31 @@ const toLacal = (admin: any, token: string) => {
 export const login = (data: adminData) => {
   return async (dispatch: AppDispatch) => {
     const sendData = async () => {
-      dispatch(actions.sendMsg({msg:"logging in.....", isAlert:true}));
+      dispatch(
+        actions.sendMsg({
+          msg: "logging in.....",
+          isAlert: true,
+          alertType: "success",
+        })
+      );
+      dispatch(clearAlert());
       const response = await axios.post("/admin/login", {
         email: data.email,
         password: data.password,
       });
-      console.log(response.data);
+
+      const { token, admin } = response.data;
+      toLacal(admin, token);
       if (response.status === 200) {
-        dispatch(actions.sendMsg( {msg:"successfully logging in", isAlert:false}));
+        dispatch(
+          actions.sendMsg({
+            msg: "successfully logging in",
+            isAlert: false,
+            alertType: "success",
+            isLoading: true,
+          })
+        );
+        dispatch(clearAlert());
         dispatch(actions.registerAdmin({ token, admin }));
         return;
       }
@@ -75,7 +110,14 @@ export const login = (data: adminData) => {
     try {
       await sendData();
     } catch (error: any) {
-      dispatch(actions.sendMsg( {msg:error.response.data.message, isAlert:true}));
+      dispatch(
+        actions.sendMsg({
+          msg: error.response.data.message,
+          isAlert: true,
+          alertType: "danger",
+        })
+      );
+      dispatch(clearAlert());
     }
   };
 };
@@ -83,7 +125,14 @@ export const login = (data: adminData) => {
 export const register = (data: adminData) => {
   return async (dispatch: AppDispatch) => {
     const sendData = async () => {
-      dispatch(actions.sendMsg({msg:"creating admin....." , isAlert:true}));
+      dispatch(
+        actions.sendMsg({
+          msg: "creating admin.....",
+          isAlert: true,
+          alertType: "success",
+        })
+      );
+      dispatch(clearAlert());
       const response = await axios.post("/admin/register", {
         email: data.email,
         password: data.password,
@@ -93,7 +142,14 @@ export const register = (data: adminData) => {
       const { token, admin } = response.data;
       toLacal(admin, token);
       if (response.status === 201) {
-        dispatch(actions.sendMsg( {msg:"admin created succesfully", isAlert:false}));
+        dispatch(
+          actions.sendMsg({
+            msg: "admin created succesfully",
+            isAlert: false,
+            alertType: "success",
+          })
+        );
+        dispatch(clearAlert());
         dispatch(actions.registerAdmin({ token, admin }));
         return;
       }
@@ -102,11 +158,18 @@ export const register = (data: adminData) => {
     try {
       await sendData();
     } catch (error: any) {
-        dispatch(actions.sendMsg( {msg:error.response.data.message, isAlert:true}));
+      dispatch(
+        actions.sendMsg({
+          msg: error.response.data.message,
+          isAlert: true,
+          alertType: "danger",
+        })
+      );
+      dispatch(clearAlert());
     }
   };
 };
 
-export const { registerAdmin } = adminSlice.actions;
+export const { registerAdmin, setError } = adminSlice.actions;
 
 export default adminSlice.reducer;
