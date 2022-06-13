@@ -8,14 +8,19 @@ const meals_1 = __importDefault(require("../models/meals"));
 const http_status_codes_1 = require("http-status-codes");
 const meals_2 = __importDefault(require("../models/meals"));
 const createMeals = async (req, res) => {
+    const { id } = req.user;
+    if (!id) {
+        res.status(404).json({ message: "Not authorized" });
+        return;
+    }
     try {
-        const { name, description, amount, price, admin } = req.body;
+        const { name, description, amount, price } = req.body;
         const mealsCreated = await meals_2.default.create({
             name,
             description,
             amount,
             price,
-            admin,
+            admin: id,
         });
         mealsCreated
             ? res
@@ -56,8 +61,9 @@ exports.getOneMeal = getOneMeal;
 const updateMeal = async (req, res) => {
     try {
         const { id } = req.params;
+        const { id: admin } = req.user;
         const updateBody = req.body;
-        const meal = await meals_1.default.findOne({ _id: id });
+        const meal = await meals_1.default.findOne({ admin });
         if (!meal) {
             res.status(404).json({ message: "meal not found" });
             return;
@@ -73,6 +79,12 @@ exports.updateMeal = updateMeal;
 const deleteMeals = async (req, res) => {
     try {
         const { id } = req.params;
+        const { id: admin } = req.user;
+        const meal = await meals_1.default.findOne({ admin });
+        if (!meal) {
+            res.status(404).json({ message: "Not authorized" });
+            return;
+        }
         const deleted = await meals_1.default.findByIdAndDelete({ _id: id });
         deleted
             ? res.status(200).json({ message: "Meal deleted successfully" })

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.protectRoutes = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const admin_1 = __importDefault(require("../models/admin"));
-// const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config();
 const secret = process.env.JWT_SECRET;
 const protectRoutes = async (req, res, next) => {
     let token;
