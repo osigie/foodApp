@@ -8,6 +8,8 @@ import {
 import { AppDispatch } from "../../app/store";
 import axios from "axios";
 import { MealType } from "../../pages/admin/dashboard/AddMeal";
+
+import { deleteMeals } from "../meals/meals";
 type adminData = {
   name: string;
   email: string;
@@ -218,6 +220,21 @@ export const createMeal = (data: MealType) => {
   };
 };
 
+export const deleteMeal = (id: string) => {
+  return async (dispatch: AppDispatch) => {
+    const deleteMealFromBack = async () => {
+      const response = await authFetch.delete("/meals/" + id);
+      if (response.status === 200) {
+        dispatch(deleteMeals(id));
+      }
+    };
+    try {
+      await deleteMealFromBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 export const { registerAdmin, setError } = adminSlice.actions;
 
 export default adminSlice.reducer;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   background: var(--white);
@@ -55,6 +55,8 @@ const Wrapper = styled.article`
   }
   .content {
     padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
   }
   .content-center {
     display: grid;
@@ -81,6 +83,7 @@ const Wrapper = styled.article`
   }
   footer {
     margin-top: 1rem;
+    align-self: end;
   }
   .edit-btn,
   .delete-btn {
@@ -100,6 +103,6 @@ const Wrapper = styled.article`
   &:hover .actions {
     visibility: visible;
   }
-`
+`;
 
-export default Wrapper
+export default Wrapper;

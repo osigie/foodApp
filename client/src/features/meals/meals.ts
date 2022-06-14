@@ -8,6 +8,7 @@ import {
 import { AppDispatch } from "../../app/store";
 import axios from "axios";
 import { RootState, AppThunk } from "../../app/store";
+import {SingleMealType} from "../../components/SingleMeal"
 
 const initialState = {
   meal: [],
@@ -24,6 +25,9 @@ const mealSlice = createSlice({
     fetchMeals: (state, action) => {
       state.meal = action.payload;
     },
+    deleteMeals:(state, action)=>{
+        state.meal = state.meal.filter((meal:SingleMealType)=>meal._id!==action.payload)
+    }
   },
 });
 
@@ -50,6 +54,6 @@ export const fetchData = () => {
   };
 };
 
-export const { fetchMeals } = mealSlice.actions;
+export const { fetchMeals, deleteMeals } = mealSlice.actions;
 
 export default mealSlice.reducer;

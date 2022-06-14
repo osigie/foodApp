@@ -14,8 +14,8 @@ function App() {
       <Route path="/" element={<StoreComponent />} />
       <Route path="/admin/register" element={<Register />} />
       <Route path="/admin" element={<SharedPage />}>
-        <Route path="/admin/add-product" element={<AddProduct />} />
-        <Route path="/admin/delete-product" element={<DeleteProduct />} />
+        <Route path="/admin/add-meal" element={<AddProduct />} />
+        <Route path="/admin/delete-meal" element={<DeleteProduct />} />
         <Route index element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />

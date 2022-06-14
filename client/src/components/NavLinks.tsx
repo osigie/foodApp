@@ -9,14 +9,14 @@ const links = [
   { id: 1, text: "profile", path: "/admin", icon: <IoBarChartSharp /> },
   {
     id: 2,
-    text: "add product",
-    path: "/admin/add-product",
+    text: "add meal",
+    path: "/admin/add-meal",
     icon: <MdQueryStats />,
   },
   {
     id: 3,
-    text: "delete product",
-    path: "/admin/delete-product",
+    text: "delete meal",
+    path: "/admin/delete-meal",
     icon: <FaWpforms />,
   },
 ];

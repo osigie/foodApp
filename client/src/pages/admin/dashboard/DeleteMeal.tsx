@@ -1,13 +1,13 @@
 import React from "react";
-import ProductContainer from "../../../components/ProductContainer";
+import MealContainer from "../../../components/MealContainer";
 type Props = {};
 
-const DeleteProduct = (props: Props) => {
+const DeleteMeal = (props: Props) => {
   return (
     <>
-      <ProductContainer />
+      <MealContainer />
     </>
   );
 };
 
-export default DeleteProduct;
+export default DeleteMeal;
