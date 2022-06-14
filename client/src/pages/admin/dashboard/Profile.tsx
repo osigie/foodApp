@@ -17,15 +17,15 @@ const Profile = () => {
   //   email: user?.email,
   // });
   const { admin } = useAppSelector((store) => store.admin);
-  const [isAlert, setIsAlert] = useState(true);
+  // const [isAlert, setIsAlert] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [state, setState] = useState({
-    name: "",
-    lastName: "",
-    location: "",
-    email: "",
-  });
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [state, setState] = useState({
+  //   name: "",
+  //   lastName: "",
+  //   location: "",
+  //   email: "",
+  // });
 
   // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();

@@ -8,12 +8,20 @@ import AddProduct from "./pages/admin/dashboard/AddMeal";
 import DeleteProduct from "./pages/admin/dashboard/AllMeals";
 import Profile from "./pages/admin/dashboard/Profile";
 import NotFound from "./components/notFound/NotFound";
+import ProtectionRoute from "./pages/admin/dashboard/ProtectionRoute";
 function App() {
   return (
     <Routes>
       <Route path="/" element={<StoreComponent />} />
       <Route path="/admin/register" element={<Register />} />
-      <Route path="/admin" element={<SharedPage />}>
+      <Route
+        path="/admin"
+        element={
+          <ProtectionRoute>
+            <SharedPage />
+          </ProtectionRoute>
+        }
+      >
         <Route path="/admin/add-meal" element={<AddProduct />} />
         <Route path="/admin/all-meal" element={<DeleteProduct />} />
         <Route index element={<Profile />} />

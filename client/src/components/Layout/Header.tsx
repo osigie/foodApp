@@ -13,6 +13,7 @@ const Header = (props: Props) => {
       <header className={classes.header}>
         <h1>Food App </h1>
         <HeaderCartButton onShow={props.onShow} />
+        <span className = {classes.admin} >Admin</span>
       </header>
       <div className={classes["main-image"]}>
         <img src={image} alt="A table full of yummy meals" />

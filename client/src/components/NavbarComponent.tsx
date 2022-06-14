@@ -2,10 +2,15 @@ import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 // import { useAppContext } from "../context/AppContext";
 // import Logo from "./Logo";
+import { useAppDispatch } from "../app/hooks";
+import { removeFromLocalStorage } from "../features/admin/admin";
+import { logOutAdmin } from "../features/admin/admin";
 import { useState } from "react";
 const NavbarComponent = () => {
+  const dispatch = useAppDispatch();
   const logOut = () => {
-    console.log("yee");
+    dispatch(logOutAdmin(null));
+    removeFromLocalStorage();
   };
 
   const toggleSideBarFunc = () => {

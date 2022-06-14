@@ -60,6 +60,10 @@ const adminSlice = createSlice({
       state.alertType = "";
       state.isLoading = false;
     },
+    logOutAdmin: (state, action) => {
+      state.token = action.payload;
+      state.admin = action.payload;
+    },
   },
 });
 
@@ -70,6 +74,12 @@ const actions = adminSlice.actions;
 const toLacal = (admin: adminData, token: string) => {
   localStorage.setItem("admin", JSON.stringify(admin));
   localStorage.setItem("token", token);
+};
+
+//remove from local storege
+export const removeFromLocalStorage = () => {
+  localStorage.removeItem("admin");
+  localStorage.removeItem("token");
 };
 
 //clear alert
@@ -280,6 +290,6 @@ export const editMealFromBack = (data: Data) => {
 //     };
 //   };
 
-export const { registerAdmin, setError } = adminSlice.actions;
+export const { registerAdmin, setError,logOutAdmin} = adminSlice.actions;
 
 export default adminSlice.reducer;
