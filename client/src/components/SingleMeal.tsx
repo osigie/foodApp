@@ -1,5 +1,7 @@
 import moment from "moment";
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+import { FaRegCheckCircle, FaCalendarAlt } from "react-icons/fa";
+import { GiPriceTag } from "react-icons/gi";
+import { BiFoodMenu } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Meal";
 import MealInfo from "./MealInfo";
@@ -30,11 +32,10 @@ const SingleMeal = (props: SingleMealType) => {
       </header> */}
       <div className="content">
         <div className="content-center">
-          <MealInfo icon={<FaLocationArrow />} text={props.name} />
+          <MealInfo icon={<BiFoodMenu />} text={props.name} />
           <MealInfo icon={<FaCalendarAlt />} text={date} />
-          <MealInfo icon={<FaBriefcase />} text={props.description} />
-          <MealInfo icon={<FaBriefcase />} text={props.price} />
-          {/* <div className={`status ${status}`}>{status}</div> */}
+          <MealInfo icon={<FaRegCheckCircle />} text={props.description} />
+          <MealInfo icon={<GiPriceTag />} text={"$" + props.price} />
         </div>
 
         <footer>
