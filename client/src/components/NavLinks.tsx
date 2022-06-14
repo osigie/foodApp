@@ -1,23 +1,21 @@
 import { NavLink } from "react-router-dom";
-import { IoBarChartSharp } from "react-icons/io5";
-import { MdQueryStats } from "react-icons/md";
-import { FaWpforms } from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
-import { IconType } from "react-icons";
+import {  MdOutlineLocalGroceryStore } from "react-icons/md";
+import { MdNoMeals } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 
 const links = [
-  { id: 1, text: "profile", path: "/admin", icon: <IoBarChartSharp /> },
+  { id: 1, text: "profile", path: "/admin", icon: <CgProfile /> },
   {
     id: 2,
     text: "add meal",
     path: "/admin/add-meal",
-    icon: <MdQueryStats />,
+    icon: <MdNoMeals />,
   },
   {
     id: 3,
-    text: "all meal",
+    text: "all meals",
     path: "/admin/all-meal",
-    icon: <FaWpforms />,
+    icon: <MdOutlineLocalGroceryStore />,
   },
 ];
 type NavProps = {
