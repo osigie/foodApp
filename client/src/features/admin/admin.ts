@@ -235,6 +235,50 @@ export const deleteMeal = (id: string) => {
     }
   };
 };
+
+type Data = {
+  editJobId: string;
+  price: string;
+  name: string;
+  description: string;
+};
+
+export const editMealFromBack = (data: Data) => {
+  return async (dispatch: AppDispatch) => {
+    const getMealFromBack = async () => {
+      const response = await authFetch.patch("/meals/" + data.editJobId, {
+        name: data.name,
+        price: Number(data.price),
+        description: data.description,
+      });
+      if (response.status === 200) {
+        //   dispatch(getMeals(id));
+      }
+    };
+    try {
+      await getMealFromBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//   export const actualEdit = (id: string) => {
+//     return async (dispatch: AppDispatch) => {
+//       const getMealFromBack = async () => {
+//         const response = await authFetch("/meals/" + id);
+//         if (response.status === 200) {
+//         //   dispatch(getMeals(id));
+//         }
+//       };
+//       try {
+//         await getMealFromBack();
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+//   };
+
 export const { registerAdmin, setError } = adminSlice.actions;
 
 export default adminSlice.reducer;

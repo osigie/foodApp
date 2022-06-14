@@ -7,8 +7,12 @@ import {
   createMeal,
   clearAlert,
   setError,
+  editMealFromBack,
 } from "../../../features/admin/admin";
-
+import {
+  handleChangeOfInput,
+  clearValues,
+} from "../../../features/meals/meals";
 export type MealType = {
   name: string;
   price: number;
@@ -21,17 +25,20 @@ const AddMeal = () => {
   const { msg, admin, isAlert, isLoading, alertType } = useAppSelector(
     (store) => store.admin
   );
+  const { name, price, description, isEdit, editJobId } = useAppSelector(
+    (store) => store.meals
+  );
 
-  const [state, setState] = useState({
-    name: "",
-    price: "", //don't forget to convert to number
-    description: "",
-  });
+  // const [state, setState] = useState({
+  //   name: "",
+  //   price: "", //don't forget to convert to number
+  //   description: "",
+  // });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!state.name || !state.description || !state.price) {
+    if (!name || !description || !price) {
       dispatch(
         setError({
           msg: "please input all fields",
@@ -42,51 +49,55 @@ const AddMeal = () => {
       dispatch(clearAlert());
       return;
     }
-
-    dispatch(
-      createMeal({
-        ...state,
-        price: Number(state.price),
-      })
-    );
+    if (!isEdit) {
+      dispatch(
+        createMeal({
+          name,
+          description,
+          price: Number(price),
+        })
+      );
+      return;
+    }
+    dispatch(editMealFromBack({ editJobId, name, price, description }));
   };
 
-
-useEffect(() => {
-  if(isLoading){
-    setState({ ...state,name: "", price: "", description: "" });
-  }
-}, [isLoading])
-
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(clearValues());
+      // setState({ ...state, name: "", price: "", description: "" });
+    }
+  }, [isLoading]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    // setState({ ...state, [e.target.name]: e.target.value });
+    dispatch(handleChangeOfInput(e));
   };
 
   return (
     <Wrapper>
       <form onSubmit={handleSubmit} className="form">
-        <h3> Add Meal </h3>
+        <h3> {isEdit ? "Add Meal" : "Edit Meal"}</h3>
         {isAlert && <Alert alertType={alertType} msg={msg} />}
         <div className="form-center">
           <FormRow
             labelText={"name"}
             type={"text"}
-            value={state.name}
+            value={name}
             handleChange={handleChange}
             name={"name"}
           />
           <FormRow
             labelText={"description"}
             type={"text"}
-            value={state.description}
+            value={description}
             handleChange={handleChange}
             name={"description"}
           />
           <FormRow
             labelText={"price"}
             type={"number"}
-            value={state.price}
+            value={price}
             handleChange={handleChange}
             name={"price"}
           />

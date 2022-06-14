@@ -8,11 +8,17 @@ import {
 import { AppDispatch } from "../../app/store";
 import axios from "axios";
 import { RootState, AppThunk } from "../../app/store";
-import {SingleMealType} from "../../components/SingleMeal"
+import { SingleMealType } from "../../components/SingleMeal";
 
 const initialState = {
   meal: [],
   loading: true,
+  name: "",
+  price: "", //don't forget to convert to number
+  description: "",
+  isEdit: false,
+  editJobId:""
+
 };
 
 const mealSlice = createSlice({
@@ -25,9 +31,27 @@ const mealSlice = createSlice({
     fetchMeals: (state, action) => {
       state.meal = action.payload;
     },
-    deleteMeals:(state, action)=>{
-        state.meal = state.meal.filter((meal:SingleMealType)=>meal._id!==action.payload)
-    }
+    deleteMeals: (state, action) => {
+      state.meal = state.meal.filter(
+        (meal: SingleMealType) => meal._id !== action.payload
+      );
+    },
+    handleChangeOfInput: (state, action) => {
+      state = { ...state, [action.payload.name]: action.payload.value };
+    },
+    getOneMealToState: (state, action) => {
+const current:any = state.meal.find((meal:any)=>meal._id===action.payload)
+      state.name = current?.name;
+      state.price = current?.price;
+      state.description = current?.description;
+      state.editJobId = current?._id
+
+    },
+    clearValues: (state) => {
+      state.name = "";
+      state.price = "";
+      state.description = "";
+    },
   },
 });
 
@@ -54,6 +78,7 @@ export const fetchData = () => {
   };
 };
 
-export const { fetchMeals, deleteMeals } = mealSlice.actions;
+export const { fetchMeals, deleteMeals, handleChangeOfInput, clearValues,getOneMealToState } =
+  mealSlice.actions;
 
 export default mealSlice.reducer;
