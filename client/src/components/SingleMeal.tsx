@@ -5,7 +5,7 @@ import Wrapper from "../assets/wrappers/Meal";
 import MealInfo from "./MealInfo";
 import { deleteMeal } from "../features/admin/admin";
 import { useAppDispatch } from "../app/hooks";
-import {getOneMealToState} from "../features/meals/meals"
+import { getOneMealToState } from "../features/meals/meals";
 export type SingleMealType = {
   createdAt: string;
   price: string;
@@ -14,7 +14,6 @@ export type SingleMealType = {
   description: string;
   updatedAt: string;
 };
-
 
 const SingleMeal = (props: SingleMealType) => {
   //   const { setEditJob, setDeleteJob } = useAppContext();
@@ -43,7 +42,7 @@ const SingleMeal = (props: SingleMealType) => {
             to="/admin/add-meal"
             className="btn edit-btn"
             onClick={() => {
-              getOneMealToState(props._id);
+              dispatch(getOneMealToState(props._id));
             }}
           >
             Edit

@@ -5,7 +5,7 @@ import StoreComponent from "./pages/StoreComponent";
 import Register from "./pages/admin/register/Register";
 import SharedPage from "./pages/admin/dashboard/SharedPage";
 import AddProduct from "./pages/admin/dashboard/AddMeal";
-import DeleteProduct from "./pages/admin/dashboard/DeleteMeal";
+import DeleteProduct from "./pages/admin/dashboard/AllMeals";
 import Profile from "./pages/admin/dashboard/Profile";
 import NotFound from "./components/notFound/NotFound";
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Route path="/admin/register" element={<Register />} />
       <Route path="/admin" element={<SharedPage />}>
         <Route path="/admin/add-meal" element={<AddProduct />} />
-        <Route path="/admin/delete-meal" element={<DeleteProduct />} />
+        <Route path="/admin/all-meal" element={<DeleteProduct />} />
         <Route index element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />

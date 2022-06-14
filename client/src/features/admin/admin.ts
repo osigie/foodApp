@@ -9,7 +9,7 @@ import { AppDispatch } from "../../app/store";
 import axios from "axios";
 import { MealType } from "../../pages/admin/dashboard/AddMeal";
 
-import { deleteMeals } from "../meals/meals";
+import { deleteMeals, toggleEdit, clearValues } from "../meals/meals";
 type adminData = {
   name: string;
   email: string;
@@ -252,7 +252,8 @@ export const editMealFromBack = (data: Data) => {
         description: data.description,
       });
       if (response.status === 200) {
-        //   dispatch(getMeals(id));
+        dispatch(toggleEdit());
+        dispatch(clearValues());
       }
     };
     try {

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, FormEvent, ChangeEvent } from "react";
 import FormRow from "../../../components/FormRow";
 import Alert from "../../../components/Alert";
 // import { useAppContext } from "../../context/AppContext";
+import { useAppSelector } from "../../../app/hooks";
+import { store } from "../../../app/store";
 
 const Profile = () => {
   // const { isAlert, isLoading, updateUser, user, changeAlert } = useAppContext();
@@ -14,7 +16,7 @@ const Profile = () => {
   //   location: user?.location,
   //   email: user?.email,
   // });
-
+  const { admin } = useAppSelector((store) => store.admin);
   const [isAlert, setIsAlert] = useState(true);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -25,57 +27,43 @@ const Profile = () => {
     email: "",
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    if (!state.name || !state.lastName || !state.email || !state.location) {
-      // changeAlert();
-      return;
-    }
+  //   if (!state.name || !state.lastName || !state.email || !state.location) {
+  //     // changeAlert();
+  //     return;
+  //   }
 
-    // updateUser(state);
-  };
+  //   // updateUser(state);
+  // };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    // setState({ ...state, [e.target.name]: e.target.value });
   };
 
   return (
     <Wrapper>
-      <form onSubmit={handleSubmit} className="form">
+      <form className="form">
         <h3> Profile </h3>
-        {isAlert && <Alert  alertType = {"success"} msg = {"danger"}/>}
+        {/* {isAlert && <Alert  alertType = {"success"} msg = {"danger"}/>} */}
         <div className="form-center">
           <FormRow
             labelText={"name"}
             type={"text"}
-            value={state.name}
+            value={admin.name}
             handleChange={handleChange}
             name={"name"}
           />
           <FormRow
-            labelText={"last Name"}
-            type={"text"}
-            value={state.lastName}
-            handleChange={handleChange}
-            name={"lastName"}
-          />
-          <FormRow
             labelText={"email"}
             type={"text"}
-            value={state.email}
+            value={admin.email}
             handleChange={handleChange}
             name={"email"}
           />
-          <FormRow
-            labelText={"location"}
-            type={"text"}
-            value={state.location}
-            handleChange={handleChange}
-            name={"location"}
-          />
-          <button className="btn btn-block" type="submit" disabled={isLoading}>
+          {/* <button className="btn btn-block" type="submit" disabled={isLoading}>
             {isLoading ? "Please wait..." : "Save changes"}
-          </button>
+          </button> */}
         </div>
       </form>
     </Wrapper>

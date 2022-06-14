@@ -13,6 +13,7 @@ import {
   handleChangeOfInput,
   clearValues,
 } from "../../../features/meals/meals";
+
 export type MealType = {
   name: string;
   price: number;
@@ -20,20 +21,22 @@ export type MealType = {
   amount?: number;
 };
 
+const initialState = {
+  name: "",
+  price: "", //don't forget to convert to number
+  description: "",
+};
+
 const AddMeal = () => {
   const dispatch = useAppDispatch();
   const { msg, admin, isAlert, isLoading, alertType } = useAppSelector(
     (store) => store.admin
   );
-  const { name, price, description, isEdit, editJobId } = useAppSelector(
+  const { isEdit, editJobId, name, description, price } = useAppSelector(
     (store) => store.meals
   );
 
-  // const [state, setState] = useState({
-  //   name: "",
-  //   price: "", //don't forget to convert to number
-  //   description: "",
-  // });
+  // const [state, setState] = useState(initialState);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,25 +62,41 @@ const AddMeal = () => {
       );
       return;
     }
-    dispatch(editMealFromBack({ editJobId, name, price, description }));
+    dispatch(
+      editMealFromBack({
+        editJobId,
+        name,
+        price,
+        description,
+      })
+    );
   };
 
   useEffect(() => {
     if (isLoading) {
       dispatch(clearValues());
-      // setState({ ...state, name: "", price: "", description: "" });
+      // setState(initialState);
     }
   }, [isLoading]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    // console.log(value, name)
     // setState({ ...state, [e.target.name]: e.target.value });
-    dispatch(handleChangeOfInput(e));
+    dispatch(handleChangeOfInput({ name, value }));
   };
+  let text;
+
+  if (!isEdit) {
+    text = "create meal";
+  } else {
+    text = "edit meal";
+  }
 
   return (
     <Wrapper>
       <form onSubmit={handleSubmit} className="form">
-        <h3> {isEdit ? "Add Meal" : "Edit Meal"}</h3>
+        <h3> {!isEdit ? "Add Meal" : "Edit Meal"}</h3>
         {isAlert && <Alert alertType={alertType} msg={msg} />}
         <div className="form-center">
           <FormRow
@@ -102,7 +121,7 @@ const AddMeal = () => {
             name={"price"}
           />
           <button className="btn btn-block" type="submit" disabled={isLoading}>
-            {isLoading ? "Please wait..." : "create meal"}
+            {isLoading ? "Please wait..." : text}
           </button>
         </div>
       </form>

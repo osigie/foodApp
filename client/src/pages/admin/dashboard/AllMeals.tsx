@@ -2,7 +2,7 @@ import React from "react";
 import MealContainer from "../../../components/MealContainer";
 type Props = {};
 
-const DeleteMeal = (props: Props) => {
+const AllMeal = (props: Props) => {
   return (
     <>
       <MealContainer />
@@ -10,4 +10,4 @@ const DeleteMeal = (props: Props) => {
   );
 };
 
-export default DeleteMeal;
+export default AllMeal;

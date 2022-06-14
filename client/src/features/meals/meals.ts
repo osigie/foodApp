@@ -13,12 +13,11 @@ import { SingleMealType } from "../../components/SingleMeal";
 const initialState = {
   meal: [],
   loading: true,
-  name: "",
-  price: "", //don't forget to convert to number
-  description: "",
   isEdit: false,
-  editJobId:""
-
+  editJobId: "",
+  name: "",
+  description: "",
+  price: "",
 };
 
 const mealSlice = createSlice({
@@ -37,21 +36,29 @@ const mealSlice = createSlice({
       );
     },
     handleChangeOfInput: (state, action) => {
-      state = { ...state, [action.payload.name]: action.payload.value };
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+      };
     },
     getOneMealToState: (state, action) => {
-const current:any = state.meal.find((meal:any)=>meal._id===action.payload)
+      const current: any = state.meal.find(
+        (meal: SingleMealType) => meal._id === action.payload
+      );
       state.name = current?.name;
       state.price = current?.price;
       state.description = current?.description;
-      state.editJobId = current?._id
-
+      state.editJobId = current?._id;
+      state.isEdit = true;
     },
     clearValues: (state) => {
       state.name = "";
       state.price = "";
       state.description = "";
     },
+    toggleEdit:(state)=>{
+        state.isEdit = !state.isEdit;
+    }
   },
 });
 
@@ -78,7 +85,13 @@ export const fetchData = () => {
   };
 };
 
-export const { fetchMeals, deleteMeals, handleChangeOfInput, clearValues,getOneMealToState } =
-  mealSlice.actions;
+export const {
+  fetchMeals,
+  deleteMeals,
+  handleChangeOfInput,
+  clearValues,
+  getOneMealToState,
+  toggleEdit
+} = mealSlice.actions;
 
 export default mealSlice.reducer;

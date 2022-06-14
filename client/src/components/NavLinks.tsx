@@ -15,8 +15,8 @@ const links = [
   },
   {
     id: 3,
-    text: "delete meal",
-    path: "/admin/delete-meal",
+    text: "all meal",
+    path: "/admin/all-meal",
     icon: <FaWpforms />,
   },
 ];
