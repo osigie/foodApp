@@ -2,6 +2,8 @@ import React from "react";
 import image from "../../assets/meals.jpg";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
+import { Link } from "react-router-dom";
+import {RiAdminLine} from "react-icons/ri"
 
 type Props = {
   onShow: () => void;
@@ -12,8 +14,18 @@ const Header = (props: Props) => {
     <>
       <header className={classes.header}>
         <h1>Food App </h1>
+      
+        <div className= {classes.rightHeader}>
         <HeaderCartButton onShow={props.onShow} />
-        <span className = {classes.admin} >Admin</span>
+        <div className={classes.adminContainer}>
+        <span className={classes.admin}>
+          <Link to="/admin/register">Admin</Link>
+        </span>
+        <RiAdminLine />
+        </div>
+      
+        </div>
+       
       </header>
       <div className={classes["main-image"]}>
         <img src={image} alt="A table full of yummy meals" />
