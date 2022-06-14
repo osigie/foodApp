@@ -7,11 +7,14 @@ import {
 
 import { AppDispatch } from "../../app/store";
 import axios from "axios";
+import { MealType } from "../../pages/admin/dashboard/AddMeal";
 type adminData = {
   name: string;
   email: string;
-  password: string;
+  password?: string;
+  _id?: string;
 };
+
 const token = localStorage.getItem("token");
 const admin: any = localStorage.getItem("admin");
 
@@ -24,8 +27,10 @@ const initialState = {
   isAlert: false,
 };
 
-// Axios Default
-axios.defaults.headers.common["Authorization"] = `Bearer ${initialState.token}`;
+const authFetch = axios.create({
+  baseURL: "",
+  headers: { Authorization: `Bearer ${initialState.token}` },
+});
 
 const adminSlice = createSlice({
   name: "admin",
@@ -40,6 +45,7 @@ const adminSlice = createSlice({
       state.msg = action.payload.msg;
       state.isAlert = action.payload.isAlert;
       state.alertType = action.payload.alertType;
+      state.isLoading = action.payload.isLoading;
     },
     setError: (state, action) => {
       state.msg = action.payload.msg;
@@ -50,6 +56,7 @@ const adminSlice = createSlice({
       state.msg = "";
       state.isAlert = false;
       state.alertType = "";
+      state.isLoading = false;
     },
   },
 });
@@ -58,7 +65,7 @@ const actions = adminSlice.actions;
 
 //add token and admin to local storage
 
-const toLacal = (admin: any, token: string) => {
+const toLacal = (admin: adminData, token: string) => {
   localStorage.setItem("admin", JSON.stringify(admin));
   localStorage.setItem("token", token);
 };
@@ -147,6 +154,7 @@ export const register = (data: adminData) => {
             msg: "admin created succesfully",
             isAlert: false,
             alertType: "success",
+            isLoading: true,
           })
         );
         dispatch(clearAlert());
@@ -157,6 +165,46 @@ export const register = (data: adminData) => {
 
     try {
       await sendData();
+    } catch (error: any) {
+      dispatch(
+        actions.sendMsg({
+          msg: error.response.data.message,
+          isAlert: true,
+          alertType: "danger",
+        })
+      );
+      dispatch(clearAlert());
+    }
+  };
+};
+
+export const createMeal = (data: MealType) => {
+  return async (dispatch: AppDispatch) => {
+    const postData = async () => {
+      dispatch(
+        actions.sendMsg({
+          msg: "creating meal.....",
+          isAlert: true,
+          alertType: "success",
+        })
+      );
+      dispatch(clearAlert());
+      const response = await authFetch.post("/meals", data);
+      if (response.status === 201) {
+        dispatch(
+          actions.sendMsg({
+            msg: "meal created succesfully",
+            isAlert: false,
+            alertType: "success",
+            isLoading: true,
+          })
+        );
+        dispatch(clearAlert());
+        return;
+      }
+    };
+    try {
+      await postData();
     } catch (error: any) {
       dispatch(
         actions.sendMsg({

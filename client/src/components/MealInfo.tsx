@@ -1,14 +1,14 @@
 
 import {ReactNode} from "react"
-import Wrapper from "../assets/wrappers/ProductInfo"
+import Wrapper from "../assets/wrappers/MealInfo"
 
 
-type ProductInfoProps = {
+type MealInfoProps = {
   icon: ReactNode,
   text: string;
 };  
 
-const ProductInfo = (props: ProductInfoProps) => {
+const MealInfo = (props: MealInfoProps) => {
   return (
    <Wrapper> 
        <span className = "icon">{props.icon}</span>
@@ -17,4 +17,4 @@ const ProductInfo = (props: ProductInfoProps) => {
   )
 }
 
-export default ProductInfo
+export default MealInfo

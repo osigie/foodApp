@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-// import logo from "./logo.svg";
-// import { Counter } from "./features/counter/Counter";
-// import Header from "./components/Layout/Header";
-// import Meals from "./components/Meals/Meals";
-// import Cart from "./components/Cart/Cart"; 
-import { Routes, Route} from "react-router-dom"
-import StoreComponent from "./pages/StoreComponent"
-import Register from "./pages/admin/register/Register"
-import SharedPage from "./pages/admin/dashboard/SharedPage"
-import AddProduct from "./pages/admin/dashboard/AddProduct";
-import DeleteProduct from "./pages/admin/dashboard/DeleteProduct"
-import Profile from "./pages/admin/dashboard/Profile"
-function App() {
 
+import { Routes, Route } from "react-router-dom";
+import StoreComponent from "./pages/StoreComponent";
+import Register from "./pages/admin/register/Register";
+import SharedPage from "./pages/admin/dashboard/SharedPage";
+import AddProduct from "./pages/admin/dashboard/AddMeal";
+import DeleteProduct from "./pages/admin/dashboard/DeleteMeal";
+import Profile from "./pages/admin/dashboard/Profile";
+import NotFound from "./components/notFound/NotFound";
+function App() {
   return (
     <Routes>
       <Route path="/" element={<StoreComponent />} />
@@ -22,6 +18,7 @@ function App() {
         <Route path="/admin/delete-product" element={<DeleteProduct />} />
         <Route index element={<Profile />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

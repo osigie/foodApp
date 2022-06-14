@@ -1,7 +1,7 @@
 // import { useAppContext } from "../context/AppContext";
 import { useEffect } from "react";
 import Loading from "./Loading";
-import SingleProduct from "./SingleProduct";
+import SingleProduct from "./SingleMeal";
 import Wrapper from "../assets/wrappers/JobsContainer";
 
 const ProductContainer = () => {

@@ -1,11 +1,11 @@
 import moment from "moment";
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Wrapper from "../assets/wrappers/Product";
+import Wrapper from "../assets/wrappers/Meal";
 // import { useAppContext } from "../context/AppContext";
-import JobInfo from "./ProductInfo";
+import MealInfo from "./MealInfo";
 
-type SingleProductType = {
+type SingleMealType = {
   createdAt: string;
   company: string;
   position: string;
@@ -15,7 +15,7 @@ type SingleProductType = {
   jobType: string;
 };
 
-const SingleProduct = (props: SingleProductType) => {
+const SingleMeal = (props: SingleMealType) => {
   //   const { setEditJob, setDeleteJob } = useAppContext();
   let date = moment(props.createdAt).format("MMM Do YYYY");
   return (
@@ -29,9 +29,9 @@ const SingleProduct = (props: SingleProductType) => {
       </header>
       <div className="content">
         <div className="content-center">
-          <JobInfo icon={<FaLocationArrow />} text={props.jobLocation} />
-          <JobInfo icon={<FaCalendarAlt />} text={date} />
-          <JobInfo icon={<FaBriefcase />} text={props.jobType} />
+          <MealInfo icon={<FaLocationArrow />} text={props.jobLocation} />
+          <MealInfo icon={<FaCalendarAlt />} text={date} />
+          <MealInfo icon={<FaBriefcase />} text={props.jobType} />
           <div className={`status ${status}`}>{status}</div>
         </div>
 
@@ -60,4 +60,4 @@ const SingleProduct = (props: SingleProductType) => {
   );
 };
 
-export default SingleProduct;
+export default SingleMeal;
