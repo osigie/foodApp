@@ -1,7 +1,5 @@
 
-.footerContainer{
-    width:100vw;
-}
+
 
 .rows {
   width: 100%;
@@ -14,6 +12,7 @@
   border-top: 1px solid #8a2b06;
   color: #fff;
   background-color: #000;
+  height:600px;
 }
 .about {
   margin-top: -1.3rem;
@@ -37,14 +36,14 @@
 .nav-link i {
   display: flex;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
   color: #fff;
 }
 .foot-1 {
   text-align: center;
   padding: 1rem 0;
-  font-size: 20px;
+  font-size: 0.1rem;
   background-color: #ccc;
   color: #8a2b06;
   width: 100%;
@@ -53,12 +52,12 @@
   .foot-1 {
     text-align: center;
     padding: 1rem 0;
-    font-size: 14px;
+    font-size: 0.1rem;
     background-color: #ccc;
     color: #8a2b06;
   }
   .child h1 {
-    font-size: 24px;
+    font-size: 0.1rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
   }
@@ -66,7 +65,7 @@
   .nav-link i {
     display: flex;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 0.5rem;
     margin-bottom: 0.5rem;
     color: #fff;
   }

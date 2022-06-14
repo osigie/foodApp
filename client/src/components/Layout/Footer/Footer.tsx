@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
 const Footer = () => {
   return (
-    <div className={classes.FooterContainer}>
+    <div >
       <div className={classes.footer}>
         <div className={classes["rows"]}>
           <div className={classes["child"]}>
