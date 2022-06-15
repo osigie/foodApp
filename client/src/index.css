@@ -32,8 +32,8 @@ html {
 
 :root {
   /* colors */
-  --primary-50: #c8b4ac;
-  --primary-100: #c08d78;
+  --primary-50: white;
+  --primary-100: white;
   --primary-200: #b07e6a;
   --primary-300: #b66444;
   --primary-400: #775244;
@@ -44,8 +44,8 @@ html {
   --primary-900: #5a1a01;
 
   /* grey */
-  --grey-50: #706d60;
-  --grey-100: #d9e2ec;
+  --grey-50: white;
+  --grey-100: white;
   --grey-200: #787053;
   --grey-300: #8a8261;
   --grey-400: #867a4d;

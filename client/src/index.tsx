@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import Table from "./components/table/table"
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -15,6 +16,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
+        {/* <Table/> */}
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

@@ -22,5 +22,8 @@ const UserSchema = new mongoose_1.default.Schema({
         type: String,
     },
     orders: { type: Array, default: [] },
+    admin: {
+        type: String,
+    },
 }, { timestamps: true });
 exports.default = mongoose_1.default.model("User", UserSchema);

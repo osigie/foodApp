@@ -80,7 +80,7 @@ const Cart = (props: Props) => {
         loading: false,
         msg: "Successfully submitted...",
       });
-      if (response.status === 200) {
+      if (response.status === 201) {
         dispatch(clearCart());
       }
     } catch (error) {

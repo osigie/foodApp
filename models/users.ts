@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
     },
     orders: { type: Array, default: [] },
+    admin: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

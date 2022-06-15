@@ -15,10 +15,13 @@ const Orders = (props: Props) => {
 
   return (
     <div className={classes.mainContainer}>
-      <h3>Custumer Details And Orders</h3>
-
+      <h3>Custumer details and order</h3>
       {user.map((each: any, key) => {
-        return <div key={key} className = {classes.card}> {<SingleOrders {...each} />}</div>;
+        return (
+          <div key={key} className={classes.card}>
+            {<SingleOrders {...each} />}
+          </div>
+        );
       })}
     </div>
   );

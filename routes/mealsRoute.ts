@@ -10,11 +10,11 @@ import {
   updateMeal,
 } from "../controllers/mealsController";
 
-router.route("/meals").post(protectRoutes,createMeals).get(getMeals);
+router.route("/meals").post(protectRoutes, createMeals).get(getMeals);
 router
   .route("/meals/:id")
   .get(getOneMeal)
-  .patch(protectRoutes,updateMeal)
-  .delete(protectRoutes,deleteMeals);
+  .patch(protectRoutes, updateMeal)
+  .delete(protectRoutes, deleteMeals);
 
 export default router;
