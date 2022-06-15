@@ -86,11 +86,22 @@ const SingleOrders = (props: Props) => {
                 );
               })}
             </ul>
+
+            <div className={classes.buttonDiv}>
+              <button
+                onClick={closeModal}
+                className={`btn btn ${classes.closeBtn}`}
+              >
+                Close
+              </button>
+            </div>
           </Wrapper>
         </Modal>
       )}
 
-      <button onClick={openModal}>View Orders</button>
+      <button onClick={openModal} className={`btn ${classes.openBtn}`}>
+        View Orders
+      </button>
     </div>
   );
 };

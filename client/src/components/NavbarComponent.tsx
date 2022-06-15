@@ -2,12 +2,14 @@ import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
 // import { useAppContext } from "../context/AppContext";
 // import Logo from "./Logo";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { removeFromLocalStorage } from "../features/admin/admin";
 import { logOutAdmin } from "../features/admin/admin";
 import { useState } from "react";
 const NavbarComponent = () => {
-  const dispatch = useAppDispatch();
+
+  const {admin} = useAppSelector((store) => store.admin)
+      const dispatch = useAppDispatch();
   const logOut = () => {
     dispatch(logOutAdmin(null));
     removeFromLocalStorage();
@@ -35,7 +37,7 @@ const NavbarComponent = () => {
             onClick={() => setShowLogout(!showLogout)}
           >
             <FaUserCircle />
-            {/* {user && user.name} */}
+            {admin && admin.name}
             <FaCaretDown />
           </button>
           <div className={showLogout ? "dropdown show-dropdown" : "dropdown"}>
