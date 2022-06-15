@@ -9,6 +9,7 @@ import DeleteProduct from "./pages/admin/dashboard/AllMeals";
 import Profile from "./pages/admin/dashboard/Profile";
 import NotFound from "./components/notFound/NotFound";
 import ProtectionRoute from "./pages/admin/dashboard/ProtectionRoute";
+import Orders from "./pages/admin/dashboard/Orders/Orders";
 function App() {
   return (
     <Routes>
@@ -24,6 +25,7 @@ function App() {
       >
         <Route path="/admin/add-meal" element={<AddProduct />} />
         <Route path="/admin/all-meal" element={<DeleteProduct />} />
+        <Route path="/admin/orders" element={<Orders />} />
         <Route index element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />

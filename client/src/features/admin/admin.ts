@@ -27,6 +27,7 @@ const initialState = {
   isLoading: false,
   alertType: "",
   isAlert: false,
+  user: [],
 };
 
 const authFetch = axios.create({
@@ -63,6 +64,9 @@ const adminSlice = createSlice({
     logOutAdmin: (state, action) => {
       state.token = action.payload;
       state.admin = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
   },
 });
@@ -274,22 +278,23 @@ export const editMealFromBack = (data: Data) => {
   };
 };
 
-//   export const actualEdit = (id: string) => {
-//     return async (dispatch: AppDispatch) => {
-//       const getMealFromBack = async () => {
-//         const response = await authFetch("/meals/" + id);
-//         if (response.status === 200) {
-//         //   dispatch(getMeals(id));
-//         }
-//       };
-//       try {
-//         await getMealFromBack();
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//   };
+export const getUser = () => {
+  return async (dispatch: AppDispatch) => {
+    const getUserFromBack = async () => {
+      const response = await axios("/user");
+      console.log(response.data);
+      if (response.status === 200) {
+        dispatch(actions.setUser(response.data));
+      }
+    };
+    try {
+      await getUserFromBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
-export const { registerAdmin, setError,logOutAdmin} = adminSlice.actions;
+export const { registerAdmin, setError, logOutAdmin } = adminSlice.actions;
 
 export default adminSlice.reducer;

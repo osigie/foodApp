@@ -17,6 +17,12 @@ const links = [
     path: "/admin/all-meal",
     icon: <MdOutlineLocalGroceryStore />,
   },
+  {
+    id: 4,
+    text: "orders",
+    path: "/admin/orders",
+    icon: <MdOutlineLocalGroceryStore />,
+  },
 ];
 type NavProps = {
   toggleSideBarFunc?: () => void;
