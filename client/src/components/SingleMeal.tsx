@@ -23,13 +23,9 @@ const SingleMeal = (props: SingleMealType) => {
   let date = moment(props.createdAt).format("MMM Do YYYY");
   return (
     <Wrapper>
-      {/* <header>
-        <div className="main-icon"> {props.company.charAt(0)} </div>
-        <div className="info">
-          <h5>{props.company}</h5>
-          <p>{props.position} </p>
-        </div>
-      </header> */}
+      <header>
+        <div className="main-icon"> {props.name.charAt(0)} </div>
+      </header>
       <div className="content">
         <div className="content-center">
           <MealInfo icon={<BiFoodMenu />} text={props.name} />

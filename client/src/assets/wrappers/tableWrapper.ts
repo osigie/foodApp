@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const Wrapper = styled.section`
   .responsive-table {
+    display: flex;
+    flex-direction: column;
     li {
       border-radius: 3px;
       padding: 25px 30px;

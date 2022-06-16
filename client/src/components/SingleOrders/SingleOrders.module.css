@@ -16,11 +16,14 @@
   margin-top: 0;
 }
 
-.openBtn{
+.openBtn {
   align-self: end;
 }
 
-
-.buttonDiv{
-  align-self: end;
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+}
+.closeBtn {
+  align-self: flex-end;
 }

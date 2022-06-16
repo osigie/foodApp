@@ -17,6 +17,8 @@ type adminData = {
   _id?: string;
 };
 
+
+
 const token = localStorage.getItem("token");
 const admin: any = localStorage.getItem("admin");
 
@@ -28,7 +30,6 @@ const initialState = {
   alertType: "",
   isAlert: false,
   user: [],
-
 };
 
 const authFetch = axios.create({
@@ -69,7 +70,6 @@ const adminSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
-
   },
 });
 
