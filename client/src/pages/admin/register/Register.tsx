@@ -12,7 +12,6 @@ import Alert from "../../../components/Alert";
 import Wrapper from "../../../assets/wrappers/RegisterPage";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { setError } from "../../../features/admin/admin";
-import Logo from "../../../components/Logo"
 type Props = {};
 
 const initialState = {
@@ -68,14 +67,13 @@ const Register = (props: Props) => {
     } else {
       dispatch(register(user));
     }
-    // console.log(details);
   };
 
   return (
     <Wrapper className="full-page">
       <form onSubmit={handleSubmit} className="form ">
         {/* <Logo /> */}
-        {/* <h1>FoodApp</h1> */}
+      
 
         <h3> {details.isMember ? "Login" : "Register"}</h3>
         {isAlert && <Alert alertType={alertType} msg={msg} />}
