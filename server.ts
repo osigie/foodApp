@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 // });
 
 const _dirname = dirname(fileURLToPath(import.meta.url))
-app.use(express.static(path.join(__dirname, "./client/public")));
+app.use(express.static(path.resolve(__dirname, "./client/public")));
 app.use(express.json());
 app.use(helmet());
 app.use(mongoSanitize());
