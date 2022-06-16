@@ -19,10 +19,7 @@ export const AdminSchema = z.object({
       .string({
         required_error: "email is required",
       })
-      .email({ message: "it must be a valid email" })
-      .max(20, {
-        message: "email must not be more than 20 characters long",
-      }),
+      .email({ message: "it must be a valid email" }),
     password: z
       .string({
         required_error: "password is required",
@@ -44,7 +41,7 @@ export const mealsSchema = z.object({
       .string({
         required_error: "name is required",
       })
-      .max(2, {
+      .min(2, {
         message: "name must be 2 characters long or more",
       })
       .max(50, {
@@ -55,7 +52,7 @@ export const mealsSchema = z.object({
       .string({
         required_error: "name is required",
       })
-      .max(2, {
+      .min(2, {
         message: "description must be 2 characters long or more",
       })
       .max(50, {
@@ -66,11 +63,6 @@ export const mealsSchema = z.object({
         required_error: "price is required",
       })
       .positive({ message: "Price must be a postive number" }),
-    amount: z
-      .number({
-        required_error: "amount is required",
-      })
-      .positive({ message: "Amount must be a postive number" }),
   }),
 });
 
@@ -84,7 +76,9 @@ export const validate =
         params: req.params,
       });
       return next();
-    } catch (error) {
-      return res.status(400).json(error);
+    } catch (error: any) {
+      return res
+        .status(400)
+        .json({ message: error.flatten().fieldErrors.body.toString() });
     }
   };

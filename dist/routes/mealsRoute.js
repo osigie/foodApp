@@ -5,9 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const authMiddleware_1 = require("../middlewares/authMiddleware");
+const validation_1 = require("../validation");
 const router = express_1.default.Router();
 const mealsController_1 = require("../controllers/mealsController");
-router.route("/meals").post(authMiddleware_1.protectRoutes, mealsController_1.createMeals).get(mealsController_1.getMeals);
+router.route("/meals").post((0, validation_1.validate)(validation_1.mealsSchema), authMiddleware_1.protectRoutes, mealsController_1.createMeals).get(mealsController_1.getMeals);
 router
     .route("/meals/:id")
     .get(mealsController_1.getOneMeal)

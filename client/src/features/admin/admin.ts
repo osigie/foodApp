@@ -163,7 +163,6 @@ export const register = (data: adminData) => {
         password: data.password,
         name: data.name,
       });
-      // console.log(response);
       const { token, admin } = response.data;
       toLacal(admin, token);
       if (response.status === 201) {
