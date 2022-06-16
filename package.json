@@ -5,10 +5,14 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./dist/server --ignore client",
+    "install-server": "npm install",
+    "install-dependencies": " npm run install-client && npm run install-server ",
+    "build-client": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build-client",
+    "server": "nodemon dist/server --ignore client",
     "client": "npm start --prefix client",
-    "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\" \" npm run build\""
+    "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,9 @@
     "concurrently": "^7.2.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.4.0",
+    "helmet": "^5.1.0",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.6",

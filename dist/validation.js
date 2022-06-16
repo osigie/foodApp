@@ -6,12 +6,8 @@ const PasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).
 const PasswordError = "Password must be at least 8 character, include uppercase, lowercase, digit and special character.";
 exports.AdminSchema = zod_1.z.object({
     body: zod_1.z.object({
-        name: zod_1.z
-            .string({
+        name: zod_1.z.string({
             required_error: "name is required",
-        })
-            .max(20, {
-            message: "name must not be more than 20 characters long",
         }),
         email: zod_1.z
             .string({
@@ -25,9 +21,6 @@ exports.AdminSchema = zod_1.z.object({
             .min(8, {
             message: "password must be 8 characters long or more",
         })
-            .max(50, {
-            message: "password must not be more than 50 characters long",
-        })
             .regex(PasswordRegex, { message: PasswordError }),
     }),
 });
@@ -40,9 +33,6 @@ exports.mealsSchema = zod_1.z.object({
         })
             .min(2, {
             message: "name must be 2 characters long or more",
-        })
-            .max(50, {
-            message: "name must not be more than 50 characters long",
         }),
         description: zod_1.z
             .string({
@@ -50,9 +40,6 @@ exports.mealsSchema = zod_1.z.object({
         })
             .min(2, {
             message: "description must be 2 characters long or more",
-        })
-            .max(50, {
-            message: "description must not be more than 50 characters long",
         }),
         price: zod_1.z
             .number({

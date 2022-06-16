@@ -1,27 +1,41 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import connectDb from "./database/connect";
-import userRouter from "./routes/userRoutes"
-import adminRouter from "./routes/adminRoutes"
-import mealsRouter from "./routes/mealsRoute"
-import morgan from "morgan"
+import userRouter from "./routes/userRoutes";
+import adminRouter from "./routes/adminRoutes";
+import mealsRouter from "./routes/mealsRoute";
+import morgan from "morgan";
+import { notFoundMiddleware } from "./middlewares/notFound";
+import mongoSanitize from "express-mongo-sanitize";
+import helmet from "helmet";
+import cors from "cors";
+// import {dirname} from "path"
+// import {fileURLToPath} from "url"
+import path from "path";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.json());
+app.use(cors());
 if (process.env.NODE_ENV !== "production") {
-    app.use(morgan("dev"));
-  }
+  app.use(morgan("dev"));
+}
 // app.get("/", (req: Request, res: Response) => {
 //   res.send("Express + TypeScript Server");
 // });
-app.use("/", userRouter)
-app.use("/", adminRouter)
-app.use("/", mealsRouter)
 
+// const _dirname = dirname(fileURLToPath(import.meta.url))
+app.use(express.static(path.join(__dirname, "./client/public")));
+app.use(express.json());
+app.use(helmet());
+app.use(mongoSanitize());
+
+app.use("/", userRouter);
+app.use("/", adminRouter);
+app.use("/", mealsRouter);
+app.use(notFoundMiddleware);
 const start = async () => {
   try {
     await connectDb(process.env.MONGO_URL as string);

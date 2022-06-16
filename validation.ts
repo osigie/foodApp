@@ -8,13 +8,9 @@ const PasswordError =
 
 export const AdminSchema = z.object({
   body: z.object({
-    name: z
-      .string({
-        required_error: "name is required",
-      })
-      .max(20, {
-        message: "name must not be more than 20 characters long",
-      }),
+    name: z.string({
+      required_error: "name is required",
+    }),
     email: z
       .string({
         required_error: "email is required",
@@ -26,9 +22,6 @@ export const AdminSchema = z.object({
       })
       .min(8, {
         message: "password must be 8 characters long or more",
-      })
-      .max(50, {
-        message: "password must not be more than 50 characters long",
       })
       .regex(PasswordRegex, { message: PasswordError }),
   }),
@@ -43,9 +36,6 @@ export const mealsSchema = z.object({
       })
       .min(2, {
         message: "name must be 2 characters long or more",
-      })
-      .max(50, {
-        message: "name must not be more than 50 characters long",
       }),
 
     description: z
@@ -54,10 +44,8 @@ export const mealsSchema = z.object({
       })
       .min(2, {
         message: "description must be 2 characters long or more",
-      })
-      .max(50, {
-        message: "description must not be more than 50 characters long",
       }),
+
     price: z
       .number({
         required_error: "price is required",

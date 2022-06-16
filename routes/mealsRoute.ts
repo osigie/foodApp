@@ -10,7 +10,7 @@ import {
   updateMeal,
 } from "../controllers/mealsController";
 
-router.route("/meals").post(validate(mealsSchema), protectRoutes, createMeals).get(getMeals);
+router.route("/meals").post( protectRoutes,validate(mealsSchema),  createMeals).get(getMeals);
 router
   .route("/meals/:id")
   .get(getOneMeal)
