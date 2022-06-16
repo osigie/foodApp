@@ -8,7 +8,6 @@ import morgan from "morgan";
 import { notFoundMiddleware } from "./middlewares/notFound";
 import mongoSanitize from "express-mongo-sanitize";
 import helmet from "helmet";
-import cors from "cors";
 // import {dirname} from "path"
 // import {fileURLToPath} from "url"
 import path from "path";
@@ -18,7 +17,6 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
