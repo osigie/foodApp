@@ -11,16 +11,19 @@ export type mealObj = {
   description: string;
   price: number;
   amount: number;
+
 };
 
 export interface cartState {
   items: Array<mealObj>;
   totalAmount: number;
+  showSideBar:Boolean
 }
 
 const initialState: cartState = {
   items: [],
   totalAmount: 0,
+  showSideBar:false
 };
 
 const cartSlice = createSlice({
@@ -77,10 +80,13 @@ const cartSlice = createSlice({
       state.items = [];
       state.totalAmount = 0;
     },
+    toggleSideBar:(state)=>{
+      state.showSideBar = !state.showSideBar;
+    }
   },
 });
 
-export const { addItemToCart, removeItemFromCart, clearCart } =
+export const { addItemToCart, removeItemFromCart, clearCart, toggleSideBar } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

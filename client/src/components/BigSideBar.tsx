@@ -1,25 +1,23 @@
-
-
 import Wrapper from "../assets/wrappers/BigSidebar";
-// import { useAppContext } from "../context/AppContext";
 import Navlinks from "./NavLinks";
+import { useAppSelector } from "../app/hooks";
 // import Logo from "./Logo";
 const BigSideBar = () => {
-  // const { showSideBar } = useAppContext();
- 
+  const { showSideBar } = useAppSelector((store) => store.cart);
   return (
     <Wrapper>
       <div
-        // className={
-        //   showSideBar ? "sidebar-container" : "sidebar-container show-sidebar"
-        // }
+        className={
+          showSideBar ? "sidebar-container" : "sidebar-container show-sidebar"
+        }
       >
         <div className="content">
           <header>
             {/* <Logo /> */}
+           <h1>FoodApp</h1> 
           </header>
 
-          <Navlinks  />
+          <Navlinks />
         </div>
       </div>
     </Wrapper>

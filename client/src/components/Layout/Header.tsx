@@ -4,6 +4,7 @@ import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 import { Link } from "react-router-dom";
 import {RiAdminLine} from "react-icons/ri"
+import Logo from "../Logo"
 
 type Props = {
   onShow: () => void;
@@ -13,7 +14,8 @@ const Header = (props: Props) => {
   return (
     <>
       <header className={classes.header}>
-        <h1>Food App </h1>
+        <h1>FoodApp </h1>
+        
       
         <div className= {classes.rightHeader}>
         <HeaderCartButton onShow={props.onShow} />

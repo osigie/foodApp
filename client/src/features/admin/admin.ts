@@ -28,6 +28,7 @@ const initialState = {
   alertType: "",
   isAlert: false,
   user: [],
+
 };
 
 const authFetch = axios.create({
@@ -68,6 +69,7 @@ const adminSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+
   },
 });
 

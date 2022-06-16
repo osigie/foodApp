@@ -1,33 +1,32 @@
 import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
-// import { useAppContext } from "../context/AppContext";
-// import Logo from "./Logo";
+import Logo from "./Logo";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { removeFromLocalStorage } from "../features/admin/admin";
-import { logOutAdmin } from "../features/admin/admin";
+import { removeFromLocalStorage, logOutAdmin } from "../features/admin/admin";
+import { toggleSideBar } from "../features/cart/cartSlice";
 import { useState } from "react";
 const NavbarComponent = () => {
-
-  const {admin} = useAppSelector((store) => store.admin)
-      const dispatch = useAppDispatch();
+  const { admin } = useAppSelector((store) => store.admin);
+  const dispatch = useAppDispatch();
   const logOut = () => {
     dispatch(logOutAdmin(null));
     removeFromLocalStorage();
   };
 
-  const toggleSideBarFunc = () => {
-    console.log("yee");
-  };
-  // const { toggleSideBarFunc, logOut, user } = useAppContext();
+
   const [showLogout, setShowLogout] = useState(false);
   return (
     <Wrapper>
       <div className="nav-center">
-        <button className="toggle-btn" onClick={toggleSideBarFunc}>
+        <button
+          className="toggle-btn"
+          onClick={() => dispatch(toggleSideBar())}
+        >
           <FaAlignLeft></FaAlignLeft>
         </button>
         <div>
           {/* <Logo /> */}
+          {/* <h1>FoodApp</h1> */}
           <h3>Dashboard</h3>
         </div>
         <div className="btn-container">

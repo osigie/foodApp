@@ -39,20 +39,20 @@ const SingleOrders = (props: Props) => {
               <div className="col col-4">Time</div>
             </li>
             <li className="table-row">
-              <div className="col col-4" data-label="Job Id">
+              <div className="col col-4" data-label="Name">
                 {props.name}
               </div>
-              <div className="col col-4" data-label="Customer Name">
+              <div className="col col-4" data-label="Street">
                 {props.street}
               </div>
-              <div className="col col-4" data-label="Amount">
+              <div className="col col-4" data-label="Postal">
                 {props.postal}
               </div>
-              <div className="col col-4" data-label="Amount">
+              <div className="col col-4" data-label="City">
                 {props.city}
               </div>
 
-              <div className="col col-4" data-label="Payment Status">
+              <div className="col col-4" data-label="Date">
                 {date}
               </div>
             </li>
@@ -70,13 +70,13 @@ const SingleOrders = (props: Props) => {
                 <div className="col col-4">Amount</div>
               </li>
 
-              {props.orders.map((order) => {
+              {props.orders.map((order, index) => {
                 return (
-                  <li className="table-row">
-                    <div className="col col-4" data-label="Job Id">
+                  <li className="table-row" key={index}>
+                    <div className="col col-4" data-label="Name">
                       {order.name}
                     </div>
-                    <div className="col col-4" data-label="Customer Name">
+                    <div className="col col-4" data-label="Price">
                       {order.price}
                     </div>
                     <div className="col col-4" data-label="Amount">
