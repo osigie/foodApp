@@ -7,7 +7,7 @@ import SharedPage from "./pages/admin/dashboard/SharedPage";
 import AddProduct from "./pages/admin/dashboard/AddMeal";
 import DeleteProduct from "./pages/admin/dashboard/AllMeals";
 import Profile from "./pages/admin/dashboard/Profile";
-// import NotFound from "./components/notFound/NotFound";
+import NotFound from "./components/notFound/NotFound";
 import ProtectionRoute from "./pages/admin/dashboard/ProtectionRoute";
 import Orders from "./pages/admin/dashboard/Orders/Orders";
 function App() {
@@ -28,7 +28,7 @@ function App() {
         <Route path="/admin/orders" element={<Orders />} />
         <Route index element={<Profile />} />
       </Route>
-      {/* <Route path="*" element={<NotFound />} /> */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
