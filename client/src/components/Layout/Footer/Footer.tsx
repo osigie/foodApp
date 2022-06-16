@@ -1,87 +1,72 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./Footer.module.css";
+// import classes from "./Footer.module.css";
+import {
+  AiFillFacebook,
+  AiOutlineTwitter,
+  AiFillLinkedin,
+  AiOutlineWhatsApp,
+} from "react-icons/ai";
+
 const Footer = () => {
   return (
-    <div >
-      <div className={classes.footer}>
-        <div className={classes["rows"]}>
-          <div className={classes["child"]}>
-            <h1 className={classes["about"]}>About Us</h1>
-            <div className={classes["children"]}>
-              <Link className={classes["nav-link"]} to="#">
-                Aim
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Vison
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Testimonials
-              </Link>
+    <>
+      <footer className="site-footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-6">
+              <h6>About</h6>
+              <p className="text-justify">
+                FoodApp goal is <i>SERVING THE WORLD</i> , an initiative that
+                started from just offering of services to my family. Now
+                FoodApp can be used by everyone, caterers can use this app to
+                sell and make good money.
+              </p>
+            </div>
+
+            <div className="col-xs-6 col-md-3">
+              <h6>Categories</h6>
+              <ul className="footer-links">
+                <li>Appetizer</li>
+                <li>BreakFast</li>
+                <li>Brunch</li>
+                <li>Lunch</li>
+                <li>Dinner</li>
+                <li>Dessert</li>
+              </ul>
+            </div>
+
+            <div className="col-xs-6 col-md-3">
+              <h6>Quick Links</h6>
+              <ul className="footer-links">
+                <li>
+                  <a href="https://github.com/osigie">About Us</a>
+                </li>
+                <li>
+                  <a href="www.linkedin.com/in/ken-osagie-750b821b1">
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/osigie/foodApp">Contribute</a>
+                </li>
+                <li>Privacy Policy</li>
+              </ul>
             </div>
           </div>
-          <div className={classes["child"]}>
-            <h1>Services</h1>
-            <div className={classes["children"]}>
-              <Link className={classes["nav-link"]} to="#">
-                African food
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Intercontinental dishes
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Catering
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Party decoration
-              </Link>
-            </div>
-          </div>
-          <div className={classes["child"]}>
-            <h1>Contact Us</h1>
-            <div className={classes["children"]}>
-              <Link className={classes["nav-link"]} to="#">
-                Lagos
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Enugu
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Ibadan
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                Kano
-              </Link>
-            </div>
-          </div>
-          <div className={classes["child"]}>
-            <h1>Social Media</h1>
-            <div className={classes["children"]}>
-              <Link className={classes["nav-link"]} to="#">
-                <i className={classes["fab fa-facebook"]}>
-                  <span style={{ marginLeft: "10px" }}>Facebook</span>
-                </i>
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                <i className={classes["fab fa-instagram"]}>
-                  <span style={{ marginLeft: "10px" }}>Instagram</span>
-                </i>
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                <i className={classes["fab fa-twitter"]}>
-                  <span style={{ marginLeft: "10px" }}>Twitter</span>
-                </i>
-              </Link>
-              <Link className={classes["nav-link"]} to="#">
-                <i className={classes["fab fa-youtube"]}>
-                  <span style={{ marginLeft: "10px" }}>Youtube</span>
-                </i>
-              </Link>
+          <hr />
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-sm-6 col-xs-12">
+              <p className="copyright-text">
+                Copyright &copy; 2022 All Rights Reserved by KenOsagie.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </footer>
+    </>
   );
 };
 export default Footer;

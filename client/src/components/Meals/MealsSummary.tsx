@@ -1,21 +1,20 @@
-
-
-import React from 'react'
+import React from "react";
 
 import classes from "./MealSummary.module.css";
 
 const MealsSummary = () => {
   return (
     <section className={classes.summary}>
-      <h2>Delicious Food, Delivered To You</h2>
+      <h2>Committed to the quickest food delivery</h2>
       <p>
-        Choose your favorite meal from our broad selection of available meals
-        and enjoy a delicious lunch or dinner at home.
+        A balanced diet is a cookie in each hand. Let food be thy medicine and
+        medicine be thy food. We all eat, and it would be a sad waste of
+        opportunity to eat badly. You don't need a silver fork to eat good food.
       </p>
-      <p>
+      {/* <p>
         All our meals are cooked with high-quality ingredients, just-in-time and
         of course by experienced chefs!
-      </p>
+      </p> */}
     </section>
   );
 };

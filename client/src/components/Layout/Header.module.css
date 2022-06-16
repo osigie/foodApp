@@ -28,18 +28,40 @@
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
 
-
-.rightHeader{
-  display:flex;
+.rightHeader {
+  display: flex;
   align-items: center;
   flex-direction: row;
-  gap:2rem
+  gap: 2rem;
 }
-.adminContainer{
-justify-self: space-between;
+.adminContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-.admin a{
-color: white
+.adminHolder{
+  display: flex;
+  flex-direction: row;
+  overflow: none;
+  justify-content:center;
+  align-items: center;
+}
+.admin a {
+  color: white;
 }
 
-
+.adminContainer h4 {
+  display: none;
+}
+@media (max-width: 500px) {
+  .logo {
+    display: none;
+  }
+  .header {
+    justify-content: center;
+  }
+  .adminContainer h4 {
+    display: inline-block;
+  }
+}

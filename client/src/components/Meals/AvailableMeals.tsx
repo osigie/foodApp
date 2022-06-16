@@ -48,17 +48,21 @@ const AvailableMeals = (props: Props) => {
 
       <Card>
         <ul>
-          {searched.map((each: MealType, index: number) => {
-            return (
-              <MealItem
-                key={index}
-                id={each._id}
-                name={each.name}
-                description={each.description}
-                price={each.price}
-              />
-            );
-          })}
+          {searched.length === 0 ? (
+            <div> No Match</div>
+          ) : (
+            searched.map((each: MealType, index: number) => {
+              return (
+                <MealItem
+                  key={index}
+                  id={each._id}
+                  name={each.name}
+                  description={each.description}
+                  price={each.price}
+                />
+              );
+            })
+          )}
         </ul>
       </Card>
     </section>
