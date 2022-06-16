@@ -2,12 +2,14 @@ import moment from "moment";
 import { FaRegCheckCircle, FaCalendarAlt } from "react-icons/fa";
 import { GiPriceTag } from "react-icons/gi";
 import { BiFoodMenu } from "react-icons/bi";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Meal";
 import MealInfo from "./MealInfo";
 import { deleteMeal } from "../features/admin/admin";
 import { useAppDispatch } from "../app/hooks";
 import { getOneMealToState } from "../features/meals/meals";
+import Modal from "./UI/Modal";
 export type SingleMealType = {
   createdAt: string;
   price: string;
@@ -18,7 +20,14 @@ export type SingleMealType = {
 };
 
 const SingleMeal = (props: SingleMealType) => {
-  //   const { setEditJob, setDeleteJob } = useAppContext();
+  const [state, setState] = useState(false);
+
+  const openModal = () => {
+    setState(true);
+  };
+  const closeModal = () => {
+    setState(false);
+  };
   const dispatch = useAppDispatch();
   let date = moment(props.createdAt).format("MMM Do YYYY");
   return (
@@ -47,13 +56,42 @@ const SingleMeal = (props: SingleMealType) => {
           <button
             type="submit"
             className="btn delete-btn"
-            onClick={() => {
-              dispatch(deleteMeal(props._id));
-            }}
+            // onClick={() => {
+            //   dispatch(deleteMeal(props._id));
+            // }}
+            onClick={openModal}
           >
             Delete
           </button>
         </footer>
+        {state && (
+          <Modal onClose={closeModal}>
+            <div className="deleteModal">
+              <header>
+                <h3>Are you sure you want to delete?</h3>
+                <hr />
+              </header>
+
+              <main className="mainButton">
+                <button
+                  onClick={closeModal}
+                  className="btn edit-btn"
+                  style={{ backgroundColor: "#456656" }}
+                >
+                  cancel
+                </button>
+                <button
+                  onClick={() => {
+                    dispatch(deleteMeal(props._id));
+                  }}
+                  className="btn delete-btn"
+                >
+                  delete
+                </button>
+              </main>
+            </div>
+          </Modal>
+        )}
       </div>
     </Wrapper>
   );
