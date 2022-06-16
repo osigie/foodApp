@@ -8,8 +8,8 @@ import morgan from "morgan";
 import { notFoundMiddleware } from "./middlewares/notFound";
 import mongoSanitize from "express-mongo-sanitize";
 import helmet from "helmet";
-// import {dirname} from "path"
-// import {fileURLToPath} from "url"
+import {dirname} from "path"
+import {fileURLToPath} from "url"
 import path from "path";
 
 dotenv.config();
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== "production") {
 //   res.send("Express + TypeScript Server");
 // });
 
-// const _dirname = dirname(fileURLToPath(import.meta.url))
+const _dirname = dirname(fileURLToPath(import.meta.url))
 app.use(express.static(path.join(__dirname, "./client/public")));
 app.use(express.json());
 app.use(helmet());
