@@ -36,11 +36,12 @@ const AvailableMeals = (props: Props) => {
 
   return (
     <section className={classes.meals}>
-      <label>
+      <label className={` ${classes.label}`}>
         <input
           type="text"
           name="search"
           onChange={(e) => setSearch(e.target.value)}
+          className={`${classes.input}`}
         />
         Search
       </label>
